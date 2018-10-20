@@ -1,0 +1,32 @@
+# Normally you use #t to translate
+# Example
+#   t(:welcome)                 # => 'Welcome'
+#   t([:welcome, :date_notify]) # => ['...', '...'] (too lazy)
+#   t(:hello, scope: [:aad])    # => 'aasdsad'
+#   t(:asdsa, default: 'aaa')   # => 'aaa'
+#   t(:asdsa, default: [:welcome, 'Both are not found'])
+#   # => 'Welcome'
+en:
+  aad:
+    hello: aasdsad
+  welcome: Welcome
+  date_notify: Today is
+
+  # DateTime use #l, passing DateTime object and format options
+  # Example
+  #   l(Date.new(2017, 12, 15), format: :custom) # => '2017-12-15'
+  date:
+    formats:
+      custom: '%Y-%m-%d'
+
+  # Support pluralization
+  # Example
+  #   t(:artists, count: 0) # => 'no artists'
+  #   t(:artists, count: 5) # => '5 artists'
+  artists:
+    zero: 'no artists'
+    one: '1 artist'
+    other: '%{count} artists'
+
+  # keys with _html suffix is marked as HTML safe (not be escaped)
+  welcome_html: "<b>Welcome %{username}</b>"

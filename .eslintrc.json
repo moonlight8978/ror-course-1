@@ -1,0 +1,21 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["prettier"],
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "globals": {
+    "ActionCable": true,
+    "App": true
+  },
+  "rules": {
+    "consistent-return": "off",
+    "newline-before-return": "error",
+    "no-confusing-arrow": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": ["error", { "args": "none" }],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+    "prettier/prettier": "error"
+  }
+}

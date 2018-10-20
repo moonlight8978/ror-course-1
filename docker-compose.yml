@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  server:
+    build:
+      context: .
+      target: dev
+      args:
+        APP_PATH: $APP_PATH
+        PORT: $PORT
+    ports:
+      - ${HOST_PORT}:${PORT}
+    command: rails s -p ${PORT}
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - .:$APP_PATH
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    volumes:
+      - ${DB_STORAGE}:/var/lib/postgresql/data
+    restart: unless-stopped
+
