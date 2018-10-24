@@ -1,9 +1,9 @@
 AllCops:
   Exclude:
-    - "node_modules/**/*"
-    - "vendor/**/*"
-    - ".git/**/*"
-    - "bin/**/*"
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'bin/**/*'
 
 Style/BlockComments:
   Enabled: false
@@ -13,11 +13,13 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/StringHashKeys:
   Enabled: true
+Layout/AlignParameters:
+  EnforcedStyle: 'with_fixed_indentation'
 Metrics/BlockLength:
   Enabled: false
 Metrics/LineLength:
   Exclude:
-    - "config/**/*"
-    - "db/**/*"
-    - "spec/*_helper.rb"
-    - "spec/support/*"
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/*_helper.rb'
+    - 'spec/support/*'
