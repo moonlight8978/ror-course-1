@@ -22,4 +22,3 @@ services:
     volumes:
       - ${DB_STORAGE}:/var/lib/postgresql/data
     restart: unless-stopped
-
