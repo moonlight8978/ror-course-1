@@ -1,4 +1,4 @@
 FactoryBot.define do
-  factory :post_voting do
+  factory :topic do
   end
 end

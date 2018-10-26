@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_024_134_607) do
+ActiveRecord::Schema.define(version: 20_181_026_010_915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -38,17 +38,18 @@ ActiveRecord::Schema.define(version: 20_181_024_134_607) do
     t.index ['manager_id'], name: 'index_category_managements_on_manager_id'
   end
 
-  create_table 'forum_thread_votings', force: :cascade do |t|
-    t.bigint 'voter_id'
-    t.bigint 'forum_thread_id'
-    t.integer 'value'
+  create_table 'posts', force: :cascade do |t|
+    t.bigint 'creator_id'
+    t.bigint 'topic_id'
+    t.text 'content'
+    t.integer 'score', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['forum_thread_id'], name: 'index_forum_thread_votings_on_forum_thread_id'
-    t.index ['voter_id'], name: 'index_forum_thread_votings_on_voter_id'
+    t.index ['creator_id'], name: 'index_posts_on_creator_id'
+    t.index ['topic_id'], name: 'index_posts_on_topic_id'
   end
 
-  create_table 'forum_threads', force: :cascade do |t|
+  create_table 'topics', force: :cascade do |t|
     t.bigint 'creator_id'
     t.bigint 'category_id'
     t.string 'name'
@@ -56,29 +57,8 @@ ActiveRecord::Schema.define(version: 20_181_024_134_607) do
     t.integer 'score', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['category_id'], name: 'index_forum_threads_on_category_id'
-    t.index ['creator_id'], name: 'index_forum_threads_on_creator_id'
-  end
-
-  create_table 'post_votings', force: :cascade do |t|
-    t.bigint 'voter_id'
-    t.bigint 'post_id'
-    t.integer 'value'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['post_id'], name: 'index_post_votings_on_post_id'
-    t.index ['voter_id'], name: 'index_post_votings_on_voter_id'
-  end
-
-  create_table 'posts', force: :cascade do |t|
-    t.bigint 'creator_id'
-    t.bigint 'forum_thread_id'
-    t.text 'content'
-    t.integer 'score', default: 0
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['creator_id'], name: 'index_posts_on_creator_id'
-    t.index ['forum_thread_id'], name: 'index_posts_on_forum_thread_id'
+    t.index ['category_id'], name: 'index_topics_on_category_id'
+    t.index ['creator_id'], name: 'index_topics_on_creator_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -90,5 +70,16 @@ ActiveRecord::Schema.define(version: 20_181_024_134_607) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['email'], name: 'index_users_on_email'
+  end
+
+  create_table 'votings', force: :cascade do |t|
+    t.bigint 'voter_id'
+    t.string 'votable_type'
+    t.bigint 'votable_id'
+    t.integer 'value'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index %w[votable_type votable_id], name: 'index_votings_on_votable_type_and_votable_id'
+    t.index ['voter_id'], name: 'index_votings_on_voter_id'
   end
 end

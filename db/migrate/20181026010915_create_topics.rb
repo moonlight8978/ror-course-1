@@ -1,6 +1,6 @@
-class CreateForumThreads < ActiveRecord::Migration[5.2]
+class CreateTopics < ActiveRecord::Migration[5.2]
   def change
-    create_table :forum_threads do |t|
+    create_table :topics do |t|
       t.belongs_to :creator, index: true
       t.belongs_to :category, index: true
       t.string :name
