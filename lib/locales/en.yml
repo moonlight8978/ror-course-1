@@ -1,6 +1,23 @@
 en:
   welcome: Welcome
+  views:
+    sessions:
+      new:
+        header: Sign in to continue
+        create_account: Create an account
+        sign_in: Sign in
+  helpers:
+    label:
+      user:
+        email: Email
+        password: Password
   activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        email: Email
+        password: Password
     errors:
       models:
         user:
@@ -10,6 +27,8 @@ en:
               taken: Username has been taken
             password:
               blank: Password is required
+              wrong: Wrong password
             email:
               blank: Email is required
               taken: Email has been taken
+              wrong: Email does not exist

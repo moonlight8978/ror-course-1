@@ -25,6 +25,17 @@ class User < ApplicationRecord
 
   before_create :set_default_role
 
+  class << self
+    def authenticate(login_params)
+      user = new(login_params)
+      persisted_user = find_by_email(user.email)
+      return user.tap { user.errors.add(:email, :wrong) } unless persisted_user
+      return persisted_user if persisted_user.authenticate(user.password)
+
+      user.tap { user.errors.add(:password, :wrong) }
+    end
+  end
+
   private
 
   def set_default_role

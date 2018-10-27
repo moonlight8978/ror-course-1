@@ -1,0 +1,28 @@
+.login-screen
+  .container
+    .row
+      .col.s6.offset-s3
+        .card
+          .card-content
+            .sign-in-logo
+              img.image src=asset_path('logo_framgia.jpg')
+            .row
+              span.col.s12.card-title.center-align = t('views.sessions.new.header')
+            = form_with model: @user, scope: :user, url: sign_in_path, local: true do |f|
+              div.row
+                .input-field.col.s12
+                  = f.text_field :email, class: classnames(invalid: @user.errors[:email].present?)
+                  = f.label :email
+                  = error_message_for(@user, :email)
+              div.row
+                .input-field.col.s12
+                  = f.password_field :password, class: classnames(invalid: @user.errors[:password].present?)
+                  = f.label :password
+                  = error_message_for(@user, :password)
+              div.row
+                .col.s6
+                  = link_to t('views.sessions.new.create_account'), '#'
+                .col.s6.right-align
+                  = f.button t('views.sessions.new.sign_in'), class: 'btn waves-effect waves-light', type: :submit
+
+
