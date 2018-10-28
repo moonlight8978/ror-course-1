@@ -15,7 +15,8 @@
   "license": "MIT",
   "scripts": {
     "prettier": "prettier --write ./app/assets/javascripts/**/*.js",
-    "lint": "eslint ./app/assets/javascripts/**/*.js"
+    "eslint": "eslint ./app/assets/javascripts/**/*.js",
+    "stylelint": "stylelint ./app/assets/stylesheets/**/*.scss"
   },
   "devDependencies": {
     "eslint": "^5.7.0",
@@ -23,6 +24,10 @@
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "stylelint": "^9.6.0",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-scss": "^3.3.2"
   }
 }

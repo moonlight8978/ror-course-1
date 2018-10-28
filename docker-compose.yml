@@ -9,7 +9,7 @@ services:
         PORT: $PORT
     ports:
       - ${HOST_PORT}:${PORT}
-    command: rails s -p ${PORT}
+    command: rails s
     stdin_open: true
     tty: true
     restart: unless-stopped
