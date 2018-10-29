@@ -31,10 +31,11 @@ install:
 before_script:
   - psql -c 'create database clvoz_test;' -U postgres
   - cp config/database.travis.yml config/database.yml
+  - cp config/credentials.travis.yml.enc config/credentials.yml.enc
 
 script:
   - yarn eslint
   - yarn stylelint
   - rubocop
-  - rake db:schema:load db:test:prepare RAILS_ENV=test
+  - rake db:schema:load RAILS_ENV=test
   - rake spec
