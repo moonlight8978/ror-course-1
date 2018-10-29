@@ -1,12 +1,13 @@
 namespace :data_preparation do
   desc 'Recalculate post and topic score'
   task calculate_score: :environment do
-    Post.includes(:votings).all.each do |post|
-      calculate_voting_score(post)
-    end
+    votable_subjects = [Post, Topic]
 
-    Topic.includes(:votings).all.each do |topic|
-      calculate_voting_score(topic)
+    votable_subjects.each do |subject|
+      votables = subject.includes(:votings).all.map do |votable|
+        votable.tap { votable.score = calculate_voting_score(votable) }
+      end
+      subject.import(votables, on_duplicate_key_update: [:score])
     end
   end
 
