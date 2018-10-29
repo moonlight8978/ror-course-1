@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
+  enum status: { offline: 0, online: 1 }
+  enum role: { user: 10, moderator: 50, admin: 100 }
+
   has_many :category_managements, foreign_key: :manager_id
   has_many :category_bannings
   has_many :topics, foreign_key: :creator_id
@@ -11,7 +14,20 @@ class User < ApplicationRecord
     through: :category_managements, source: :category
   has_many :banned_categories, through: :category_bannings, source: :category
   has_many :voted_topics,
-    through: :votings, source: :votable, source_type: Topic.name
+    through: :votings, source: :votable, source_type: 'Topic'
   has_many :voted_posts,
-    through: :votings, source: :votable, source_type: Post.name
+    through: :votings, source: :votable, source_type: 'Post'
+
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true
+  validates :username, presence: true, uniqueness: true
+  validates :role, presence: true, on: :update
+
+  before_create :set_default_role
+
+  private
+
+  def set_default_role
+    self.role ||= :user
+  end
 end
