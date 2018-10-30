@@ -32,6 +32,7 @@ end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'activerecord-import'
 gem 'cancancan'
 gem 'draper'
 gem 'kaminari'
