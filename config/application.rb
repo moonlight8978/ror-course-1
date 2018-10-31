@@ -44,5 +44,10 @@ module ClVoz
     # Autoload paths
     config.autoload_paths << Rails.root.join('lib')
     config.assets.paths << Rails.root.join('node_modules')
+
+    # Turn off '.field-with-errors'
+    ActionView::Base.field_error_proc = proc do |html_tag, _instance|
+      html_tag.html_safe
+    end
   end
 end

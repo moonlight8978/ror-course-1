@@ -17,3 +17,7 @@
 //= require @fortawesome/fontawesome-free/js/all.min
 //= require materialize-css/dist/js/materialize.min
 //= require_tree .
+
+$(document).ready(() => {
+  $('.materialboxed').materialbox()
+})
