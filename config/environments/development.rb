@@ -59,8 +59,9 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Web-console gem (Docker conflict)
-  config.web_console.whitelisted_ips = ['192.168.0.0/16', '172.18.0.0/16']
+  # Web-console gem, better errors gem (Fix conflict with Docker)
+  config.web_console.whitelisted_ips = ['0.0.0.0/0']
+  BetterErrors::Middleware.allow_ip! '0.0.0.0/0'
 
   # Skip assets on `rails g ...`
   config.generators.assets = false

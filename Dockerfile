@@ -1,7 +1,6 @@
 FROM ruby:latest as dev
 
 ARG APP_PATH
-ARG PORT
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y \
@@ -25,4 +24,4 @@ RUN bundle install
 
 COPY . .
 
-EXPOSE $PORT
+EXPOSE 3000

@@ -6,9 +6,8 @@ services:
       target: dev
       args:
         APP_PATH: $APP_PATH
-        PORT: $PORT
     ports:
-      - ${HOST_PORT}:${PORT}
+      - ${HOST_PORT}:3000
     command: rails s
     stdin_open: true
     tty: true
@@ -20,5 +19,7 @@ services:
   db:
     image: postgres:latest
     volumes:
-      - ${DB_STORAGE}:/var/lib/postgresql/data
+      - /tmp/app/clvoz/db:/var/lib/postgresql/data
     restart: unless-stopped
+    ports:
+      - ${HOST_DB_PORT}:5432
