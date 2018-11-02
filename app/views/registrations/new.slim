@@ -1,0 +1,51 @@
+= content_for :title do
+  = t('views.registrations.new.title')
+
+.sign-up-screen
+  .container
+    .row
+      .col.s8.offset-s2
+        .card
+          .card-content
+            .logo
+              img.image src=asset_path('logo_framgia.jpg')
+
+            .row
+              span.col.s12.card-title = t('views.registrations.new.header')
+
+            = form_with model: @user, scope: :user, url: sign_up_path, local: true do |f|
+              .row
+                .col.s8
+                  .row
+                    .input-field.col.s12
+                      = f.text_field :username,
+                        class: classnames(invalid: @user.errors[:username].present?)
+                      = f.label :username
+                      = error_message_for(@user, :username)
+
+                  .row
+                    .input-field.col.s12
+                      = f.text_field :email,
+                        class: classnames(invalid: @user.errors[:email].present?)
+                      = f.label :email
+                      = error_message_for(@user, :email)
+
+                  .row
+                    .input-field.col.s12
+                      = f.password_field :password,
+                        class: classnames(invalid: @user.errors[:password].present?),
+                        autocomplete: 'new-password'
+                      = f.label :password
+                      = error_message_for(@user, :password)
+
+                  .row
+                    .col.s6
+                      = link_to t('views.registrations.new.sign_in'), sign_in_path
+                    .col.s6.right-align
+                      = f.button t('views.registrations.new.submit'),
+                        class: 'btn waves-effect waves-light',
+                        type: :submit
+
+                .col.s4
+                  img.image src=asset_path('account.svg')
+

@@ -38,7 +38,7 @@ RSpec.feature 'User sign in and sign out', type: :feature do
 
   feature 'Sign out' do
     it_behaves_like 'feature_require_authentication', proc {
-      visit(sign_out_path)
+      visit sign_out_path
     }
 
     context 'when user is already signed in' do

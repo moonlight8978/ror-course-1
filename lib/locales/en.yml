@@ -17,6 +17,13 @@ en:
         header: Sign in to continue
         create_account: Create an account
         sign_in: Sign in
+    registrations:
+      new:
+        title: Sign up
+        header: Create CLvOZ account
+        submit: Sign up
+        sign_in: Already have account? Sign in
+
   helpers:
     label:
       user:
