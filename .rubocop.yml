@@ -28,3 +28,7 @@ Metrics/LineLength:
     - 'db/**/*'
     - 'spec/*_helper.rb'
     - 'spec/support/*'
+Naming/PredicateName:
+  NamePrefixBlacklist:
+    - is_
+    - have_

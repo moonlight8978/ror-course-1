@@ -118,6 +118,7 @@ seed :posts do
     users = users_can_interact_with_category(topic.category)
     30.times do
       posts << topic.posts.build(
+        category: topic.category,
         creator: users.sample,
         content: Faker::Lorem.paragraph(2, true)
       )

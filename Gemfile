@@ -35,8 +35,8 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'activerecord-import'
-gem 'cancancan'
 gem 'draper'
 gem 'kaminari'
+gem 'pundit'
 gem 'rails-i18n'
 gem 'slim-rails'

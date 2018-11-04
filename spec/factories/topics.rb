@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :topic do
     association :creator, factory: :user
     category
-    name { "#{Faker::Footbal.player} #{SecureRandom.uuid}" }
+    name { "#{Faker::Football.player} #{SecureRandom.uuid}" }
     status { :opening }
 
     after(:create) do |topic|
