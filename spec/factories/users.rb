@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.unique.email }
+    email { "#{SecureRandom.hex(10)}_#{Faker::Internet.email}" }
     password { '1111' }
-    username { Faker::Football.unique.player }
+    username { "#{Faker::Dota.player} #{SecureRandom.hex(10)}" }
     role { :user }
 
     trait :moderator do

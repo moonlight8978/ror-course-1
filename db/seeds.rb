@@ -18,19 +18,21 @@ seed :users do
   users << User.new(
     email: 'admin@framgia.com',
     password: '1111',
-    username: 'Admin depzai'
+    username: 'Admin depzai',
+    role: :admin
   )
 
   users << User.new(
     email: 'moderator@framgia.com',
     password: '1111',
-    username: 'Moderator khoai to'
+    username: 'Moderator khoai to',
+    role: :moderator
   )
 
   10.times do
     users << User.new(
-      email: Faker::Internet.unique.email,
-      username: Faker::Football.unique.player,
+      email: "#{SecureRandom.hex(10)}_#{Faker::Internet.email}",
+      username: "#{Faker::Dota.player} #{SecureRandom.hex(10)}",
       password: '1111',
       role: :moderator
     )
@@ -38,8 +40,8 @@ seed :users do
 
   100.times do
     users << User.create(
-      email: Faker::Internet.unique.email,
-      username: Faker::Name.unique.name,
+      email: "#{SecureRandom.hex(10)}_#{Faker::Internet.email}",
+      username: "#{Faker::Dota.player} #{SecureRandom.hex(10)}",
       password: '1111'
     )
   end
@@ -51,7 +53,9 @@ seed :categories do
   categories = []
 
   20.times do
-    categories << Category.new(name: Faker::Football.unique.team)
+    categories << Category.new(
+      name: "#{Faker::Football.team} #{SecureRandom.uuid}"
+    )
   end
 
   Category.import(categories, on_duplicate_key_ignore: true)
@@ -97,7 +101,7 @@ seed :topics do
 
     20.times do
       topics << category.topics.build(
-        name: "#{Faker::Football.competition} #{Faker::Dota.hero} #{Faker::Dota.team}",
+        name: "#{Faker::Football.player} #{SecureRandom.uuid}",
         status: :opening,
         creator: users.sample
       )
