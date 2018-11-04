@@ -1,0 +1,55 @@
+@import 'utils/all';
+
+// Index
+.categories-screen {
+  .category-list-container {
+    margin: 0;
+  }
+
+  .category-list-header {
+    background-color: $background-highlight;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .category-list {
+    .category-list-item {
+      position: relative;
+
+      .category-icon {
+        margin-right: 1rem;
+      }
+
+      .category-name {
+        font-size: 1.15em;
+      }
+
+      .topic-metadata {
+        font-size: 0.9em;
+
+        .topic-started-by {
+          color: $text-muted;
+        }
+
+        .topic-creator-name {
+          color: $text-primary;
+        }
+      }
+
+      .category-divider {
+        position: absolute;
+        left: -1rem;
+        right: -1rem;
+        bottom: -1rem;
+        height: 1px;
+        background-color: $background-highlight;
+      }
+
+      &:last-child {
+        .category-divider {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -46,3 +46,24 @@
     max-width: 1140px;
   }
 }
+
+.row {
+  margin-bottom: 0;
+}
+
+.row-list-header,
+.row-list {
+  padding: 1rem 1.5rem;
+
+  > .row {
+    margin: 2rem -0.75rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

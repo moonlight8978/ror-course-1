@@ -1,7 +1,8 @@
 class Topic < ApplicationRecord
   enum status: { opening: 0, locked: 5, deleted: 10 }
 
-  belongs_to :category
+  # TODO: optimize counter cache
+  belongs_to :category, counter_cache: true
   belongs_to :creator, class_name: 'User'
 
   has_many :posts

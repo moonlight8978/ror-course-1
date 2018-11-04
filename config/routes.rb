@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'test#index'
+  root to: 'categories#index'
 
   get 'test', to: 'test#index'
 
@@ -12,5 +12,14 @@ Rails.application.routes.draw do
   scope module: :registrations do
     get 'sign_up', action: :new
     post 'sign_up', action: :create
+  end
+
+  resources :users, only: :show
+  resource :me, only: :show
+
+  resources :categories, shallow: true, only: %i[index show] do
+    resources :topics do
+      resources :posts
+    end
   end
 end

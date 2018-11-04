@@ -1,7 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :topic
-  belongs_to :category
+  # TODO: optimize counter cache
+  belongs_to :category, counter_cache: true
 
   has_many :votings, as: :votable
 

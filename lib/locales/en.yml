@@ -11,6 +11,8 @@ en:
       links: Links
       team: Team 20cm
       copyright: © 2018 Copyright Team 20cm
+    breadcrumbs:
+      categories: Home
     sessions:
       new:
         title: Sign in
@@ -23,6 +25,18 @@ en:
         header: Create CLvOZ account
         submit: Sign up
         sign_in: Already have account? Sign in
+    categories:
+      index:
+        title: Home
+        empty: No categories
+        row_headers:
+          name: Forums
+          topics_count: Topics
+          posts_count: Posts
+          last_topic: Last topic
+        last_topic:
+          blank: No topics
+          started_by: Started by
 
   helpers:
     label:

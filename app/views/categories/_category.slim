@@ -1,0 +1,27 @@
+.category-list-item.row
+  .col.s6
+    = link_to category_path(category) do
+      i.fas.fa-comments.category-icon
+      span.category-name = category.name
+  .col.s1.center-align.topics-count
+    = category.topics.size
+  .col.s1.center-align.posts-count
+    = category.posts.size
+  .col.s4
+    - if category.last_topic
+      .truncate
+        = link_to category.last_topic.name, topic_path(category.last_topic)
+      .row.topic-metadata
+        .col.s8
+          .truncate
+            span.topic-started-by
+              | #{t('views.categories.index.last_topic.started_by')}:
+            =< link_to category.last_topic.creator.username,
+              user_path(category.last_topic.creator),
+              class: 'topic-creator-name'
+        .col.s4
+          .truncate.right-align = time_ago_in_words(category.last_topic.created_at)
+    - else
+      .truncate = t('views.categories.index.last_topic.blank')
+
+  .category-divider

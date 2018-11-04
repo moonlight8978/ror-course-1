@@ -76,7 +76,7 @@ $ rails credentials:show  # to show credentials
 - Create database
 
 ```bash
-$ rake db:reset db:seed data:score
+$ rake db:reset db:seed data:score data:counter
 ```
 
 - Run server
