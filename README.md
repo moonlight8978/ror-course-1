@@ -1,6 +1,7 @@
 # Simple CLoneVOZ app for framgia's training course
 
-![Build status](https://travis-ci.com/moonlight8978/ror-course-1.svg?branch=master)
+[![Build Status](https://travis-ci.com/moonlight8978/ror-course-1.svg?branch=master)](https://travis-ci.com/moonlight8978/ror-course-1)
+[![Repository](https://img.shields.io/badge/repo-ror--course--1-brightgreen.svg)](https://github.com/moonlight8978/ror-course-1)
 
 - For research purpose
 
@@ -8,51 +9,64 @@
 
 ```bash
 $ ruby -v
-# ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux]
+# ruby 2.5.3p105 (2018-10-18 revision 65156) [x86_64-linux]
 $ rails -v
 # Rails 5.2.1
+$ docker -v
+# Docker version 18.06.1-ce, build e68fc7a
+$ docker-compose -v
+# docker-compose version 1.22.0, build f46880fe
 ```
 
-### Setup (with docker)
+### Help
+
+```bash
+$ make help
+```
+
+### Setup with Docker (Recommened)
+
+- Pick your favorite ports by editing the `.env` file
 
 - Build and install npm packages
 
 ```bash
-$ docker-compose build
-$ docker-compose run --rm server npm i
+$ make build
 ```
 
-- Create credentials
+- Create credentials following by `config/credentials.sample.yml
 
 ```bash
-$ docker-compose run --rm server bash
-# From container run, DATABASE_HOST must be 'db'
-$ EDITOR=vim rails credentials:edit
-```
-
-- Run the stack
-
-```bash
-$ docker-compose up -d
+$ make credentials
+# Note that DATABASE_HOST must be 'db'
 ```
 
 - Create db
 
 ```bash
-$ docker-compose run --rm server rake db:reset db:seed data_preparation:calculate_score
+$ make db-reset
+# You can browse the db using pgAdmin4 by visit http://localhost:9999
 ```
 
-### Setup (without docker)
+- Run the stack
+
+```bash
+$ make start
+# And stop the stack
+$ make stop
+```
+
+### Setup without Docker
 
 - Install dependencies:
 
 ```bash
 $ sudo apt-get update && sudo apt-get install imagemagick
-$ bundle install
-$ npm i
+$ bundle
+$ yarn
 ```
 
-- Create env variables, following by `config/credentials.yml.sample`
+- Create env variables, following by `config/credentials.sample.yml`
 
 ```bash
 $ EDITOR=gedit rails credentials:edit  # or EDITOR=vim
@@ -62,7 +76,7 @@ $ rails credentials:show  # to show credentials
 - Create database
 
 ```bash
-$ rake db:reset db:seed data_preparation:calculate_score
+$ rake db:reset db:seed data:score
 ```
 
 - Run server

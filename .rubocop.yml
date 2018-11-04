@@ -17,6 +17,9 @@ Layout/AlignParameters:
   EnforcedStyle: 'with_fixed_indentation'
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*'
 Metrics/BlockLength:
   Enabled: false
 Metrics/LineLength:

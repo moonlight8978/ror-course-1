@@ -1,6 +1,6 @@
-namespace :data_preparation do
+namespace :data do
   desc 'Recalculate post and topic score'
-  task calculate_score: :environment do
+  task score: :environment do
     votable_subjects = [Post, Topic]
 
     votable_subjects.each do |subject|
