@@ -1,0 +1,24 @@
+.navbar-fixed
+  - if signed_in?
+    ul#userSettingsDropdown.dropdown-content
+      li
+        a href="#!" = t('views.navbar.dropdown.settings')
+      li
+        = link_to t('views.navbar.dropdown.sign_out'), sign_out_path
+
+  nav.navbar
+    .bs-container
+      .nav-wrapper
+        = link_to t('views.navbar.home'), root_path, class: 'brand-logo'
+
+        - if signed_in?
+          ul#userNavUtils.right.hide-on-med-and-down
+            li
+              a href="#!" = t('views.navbar.dashboard')
+            li.nav-avatar
+              a href="#!"
+                img.image src=asset_path('default_avatar.png')
+            li
+              a.dropdown-trigger href="#!" data-target="userSettingsDropdown"
+                i.material-icons.right
+                  | arrow_drop_down

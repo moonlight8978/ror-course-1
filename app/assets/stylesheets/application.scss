@@ -11,7 +11,68 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
- *= require_self
  *= require materialize-css/dist/css/materialize.min.css
  *= require animate.css/animate.min
+ *= require_self
  */
+
+#appContainer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar {
+  .nav-avatar {
+    width: 50px;
+    margin-left: 1rem;
+
+    a {
+      padding: 7px 0;
+      position: relative;
+
+      img {
+        border-radius: 999px;
+      }
+
+      &:hover {
+        background-color: transparent;
+
+        img {
+          box-shadow: 0 0 5px 1px #fff;
+        }
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        border: 2px solid #fff;
+        top: 7px;
+        bottom: 7px;
+        border-radius: 999px;
+        right: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+.breadcrumbs {
+  background-color: #fff;
+
+  .breadcrumb {
+    &,
+    &:before {
+      color: #9e9e9e;
+    }
+
+    &:last-child {
+      color: rgba(0, 0, 0, 0.87);
+    }
+  }
+}
+
+footer.page-footer {
+  .col {
+    padding: 0;
+  }
+}

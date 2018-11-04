@@ -1,8 +1,19 @@
 en:
   welcome: Welcome
   views:
+    navbar:
+      home: Home
+      dashboard: Dashboard
+      dropdown:
+        sign_out: Sign out
+        settings: Settings
+    footer:
+      links: Links
+      team: Team 20cm
+      copyright: © 2018 Copyright Team 20cm
     sessions:
       new:
+        title: Sign in
         header: Sign in to continue
         create_account: Create an account
         sign_in: Sign in

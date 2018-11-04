@@ -20,4 +20,5 @@
 
 $(document).ready(() => {
   $('.materialboxed').materialbox()
+  $('.dropdown-trigger').dropdown()
 })

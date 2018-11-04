@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    = render 'layouts/head'
+
+  body
+    = render 'layouts/navbar'
+    = yield :breadcrumbs
+
+    #appContainer.bs-container
+      = yield
+
+    = render 'layouts/footer'

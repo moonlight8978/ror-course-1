@@ -9,9 +9,7 @@ RSpec.describe 'Sessions', type: :request do
       end
     end
 
-    it_behaves_like 'guest_only', lambda { |request|
-      request.get request.sign_in_path
-    }
+    it_behaves_like 'request_guest_only', proc { get sign_in_path }
   end
 
   describe 'POST /sign_in' do
@@ -42,8 +40,23 @@ RSpec.describe 'Sessions', type: :request do
       end
     end
 
-    it_behaves_like 'guest_only', lambda { |request|
-      request.post request.sign_in_path
+    it_behaves_like 'request_guest_only', proc { post(sign_in_path) }
+  end
+
+  describe 'GET /sign_out' do
+    let(:user) { create(:user, password: '1111') }
+
+    context 'when user signed in' do
+      before { sign_in_as(user.email) }
+
+      it 'signed out the user and redirect to login page' do
+        get sign_out_path
+        expect(response).to redirect_to(sign_in_path)
+      end
+    end
+
+    it_behaves_like 'request_require_authentication', proc {
+      get sign_out_path
     }
   end
 end

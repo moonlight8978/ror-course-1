@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  layout 'auth'
+
   before_action :authenticate_user!, only: :destroy
   before_action :guest_only, except: :destroy
 

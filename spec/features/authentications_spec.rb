@@ -37,6 +37,17 @@ RSpec.feature 'User sign in and sign out', type: :feature do
   end
 
   feature 'Sign out' do
-    # TODO: signout acceptance test
+    it_behaves_like 'feature_require_authentication', proc {
+      visit(sign_out_path)
+    }
+
+    context 'when user is already signed in' do
+      scenario 'user sign out' do
+        sign_in_as(user.email)
+        find('a.dropdown-trigger[data-target="userSettingsDropdown"]').click
+        find('#userSettingsDropdown').click_link('Sign out')
+        expect(page).to have_content('Sign in to continue')
+      end
+    end
   end
 end
