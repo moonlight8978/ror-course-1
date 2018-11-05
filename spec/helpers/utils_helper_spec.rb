@@ -36,4 +36,28 @@ RSpec.describe UtilsHelper, type: :helper do
       end
     end
   end
+
+  describe '#breadcrumbs_for' do
+    context 'with path' do
+      let(:breadcrumb_link) { Hash[path: '/xxx', title: 'Link 1'] }
+
+      it 'generate hyperlinks' do
+        helper.breadcrumbs_for(breadcrumb_link)
+        expect(helper.content_for(:breadcrumbs)).to(
+          include('<a alt="Link 1" class="breadcrumb" href="/xxx">Link 1</a>')
+        )
+      end
+    end
+
+    context 'without path' do
+      let(:breadcrumb) { Hash[title: 'Home'] }
+
+      it 'generate text span' do
+        helper.breadcrumbs_for(breadcrumb)
+        expect(helper.content_for(:breadcrumbs)).to(
+          include('<span class="breadcrumb">Home</span>')
+        )
+      end
+    end
+  end
 end

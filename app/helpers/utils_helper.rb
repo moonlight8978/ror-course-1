@@ -15,4 +15,8 @@ module UtilsHelper
       :span, nil, class: 'helper-text', data: { error: error_messages.first }
     )
   end
+
+  def breadcrumbs_for(*links)
+    render 'layouts/breadcrumbs', links: links
+  end
 end

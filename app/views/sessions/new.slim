@@ -1,3 +1,6 @@
+= content_for :title do
+  = t('views.sessions.new.title')
+
 .login-screen
   .container
     .row
@@ -21,7 +24,7 @@
                   = error_message_for(@user, :password)
               div.row
                 .col.s6
-                  = link_to t('views.sessions.new.create_account'), '#'
+                  = link_to t('views.sessions.new.create_account'), sign_up_path
                 .col.s6.right-align
                   = f.button t('views.sessions.new.sign_in'), class: 'btn waves-effect waves-light', type: :submit
 
