@@ -27,6 +27,7 @@ RSpec.feature 'User register new account', type: :feature do
           fill_in 'Email', with: user.email
           fill_in 'Username', with: user.username
           fill_in 'Password', with: '1111'
+          fill_in 'Password confirmation', with: '1111'
           click_button 'Sign up'
         end
 

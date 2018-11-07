@@ -46,6 +46,8 @@ en:
             password:
               blank: Password is required
               wrong: Wrong password
+            password_confirmation:
+              confirmation: Passwords must match
             email:
               blank: Email is required
               taken: Email has been taken

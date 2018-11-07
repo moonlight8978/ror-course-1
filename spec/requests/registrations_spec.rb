@@ -19,8 +19,10 @@ RSpec.describe 'Registrations', type: :request do
 
       subject { post sign_up_path, params: { user: registration_params } }
 
-      context 'with invalid params' do
-        let(:registration_params) { Hash[password: '1111', email: user.email] }
+      context 'with invalid/missing params' do
+        let(:registration_params) do
+          Hash[password: '1111', email: user.email]
+        end
 
         it 'does not make any changes' do
           expect { subject }.not_to change { User.count }
@@ -34,7 +36,10 @@ RSpec.describe 'Registrations', type: :request do
 
       context 'with valid params' do
         let(:registration_params) do
-          Hash[username: user.username, password: '1111', email: user.email]
+          Hash[
+            username: user.username, email: user.email,
+            password: '1111', password_confirmation: '1111'
+          ]
         end
 
         it 'create new user' do

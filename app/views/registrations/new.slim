@@ -31,17 +31,22 @@
                       = error_message_for(@user, :email)
 
                   .row
-                    .input-field.col.s12
+                    .input-field.col.s6
                       = f.password_field :password,
-                        class: classnames(invalid: @user.errors[:password].present?),
-                        autocomplete: 'new-password'
+                        class: classnames(invalid: @user.errors[:password].present?)
                       = f.label :password
                       = error_message_for(@user, :password)
 
+                    .input-field.col.s6
+                      = f.password_field :password_confirmation,
+                        class: classnames(invalid: @user.errors[:password_confirmation].present?)
+                      = f.label :password_confirmation
+                      = error_message_for(@user, :password_confirmation)
+
                   .row
-                    .col.s6
+                    .col.s8
                       = link_to t('views.registrations.new.sign_in'), sign_in_path
-                    .col.s6.right-align
+                    .col.s4.right-align
                       = f.button t('views.registrations.new.submit'),
                         class: 'btn waves-effect waves-light',
                         type: :submit
