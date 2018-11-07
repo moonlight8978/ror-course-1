@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+
   Unauthenticated = Class.new(StandardError)
 
   before_action :set_locale

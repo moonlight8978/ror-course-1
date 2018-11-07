@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :topic
+  belongs_to :category
 
   has_many :votings, as: :votable
 

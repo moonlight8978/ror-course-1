@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_026_010_915) do
+ActiveRecord::Schema.define(version: 20_181_104_055_641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20_181_026_010_915) do
     t.integer 'score', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'category_id'
+    t.index ['category_id'], name: 'index_posts_on_category_id'
     t.index ['creator_id'], name: 'index_posts_on_creator_id'
     t.index ['topic_id'], name: 'index_posts_on_topic_id'
   end
@@ -82,4 +84,6 @@ ActiveRecord::Schema.define(version: 20_181_026_010_915) do
     t.index %w[votable_type votable_id], name: 'index_votings_on_votable_type_and_votable_id'
     t.index ['voter_id'], name: 'index_votings_on_voter_id'
   end
+
+  add_foreign_key 'posts', 'categories'
 end

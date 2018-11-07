@@ -36,6 +36,18 @@ class User < ApplicationRecord
     end
   end
 
+  def has_role?(role)
+    read_attribute_before_type_cast(:role) >= self.class.roles[role]
+  end
+
+  def can_manage_category?(category)
+    managed_categories.pluck(:id).include?(category.try(:id) || category)
+  end
+
+  def can_interact_with_category?(category)
+    !banned_categories.pluck(:id).include?(category.try(:id) || category)
+  end
+
   private
 
   def set_default_role
