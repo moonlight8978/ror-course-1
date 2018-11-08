@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'layouts/application', type: :view do
+  let(:user) { create(:user) }
+
+  before do
+    without_partial_double_verification do
+      allow(view).to receive(:policy) do |record|
+        Pundit.policy(user, record)
+      end
+    end
+  end
+
   context 'when guest visits' do
     before do
       without_partial_double_verification do

@@ -13,7 +13,7 @@
 
         - if signed_in?
           ul#userNavUtils.right.hide-on-med-and-down
-            - if current_user.admin?
+            - if policy(:application).manage?
               li
                 a href="#!" = t('views.navbar.dashboard')
             li.nav-avatar
