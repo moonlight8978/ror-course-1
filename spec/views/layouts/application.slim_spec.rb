@@ -16,6 +16,10 @@ RSpec.describe 'layouts/application', type: :view do
     it 'does not render the user utilities menu' do
       expect(rendered).not_to have_css('#userNavUtils')
     end
+
+    it 'renders the guest utilities menu' do
+      expect(rendered).to have_css('#guestNavUtils')
+    end
   end
 
   context 'when user is already signed in' do
@@ -24,6 +28,10 @@ RSpec.describe 'layouts/application', type: :view do
         allow(view).to receive(:signed_in?).and_return(true)
       end
       render
+    end
+
+    it 'does not render the guest utilities menu' do
+      expect(rendered).not_to have_css('#guestNavUtils')
     end
 
     it 'renders the user settings dropdown' do

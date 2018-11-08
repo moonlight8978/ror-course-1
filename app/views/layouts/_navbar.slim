@@ -22,3 +22,9 @@
               a.dropdown-trigger href="#!" data-target="userSettingsDropdown"
                 i.material-icons.right
                   | arrow_drop_down
+        - else
+          ul#guestNavUtils.right.hide-on-med-and-down
+            li
+              = link_to t('views.navbar.guest.sign_in'), sign_in_path
+            li
+              = link_to t('views.navbar.guest.sign_up'), sign_up_path
