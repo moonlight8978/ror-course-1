@@ -13,8 +13,9 @@
 
         - if signed_in?
           ul#userNavUtils.right.hide-on-med-and-down
-            li
-              a href="#!" = t('views.navbar.dashboard')
+            - if current_user.admin?
+              li
+                a href="#!" = t('views.navbar.dashboard')
             li.nav-avatar
               a href="#!"
                 img.image src=asset_path('default_avatar.png')
