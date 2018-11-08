@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   Unauthenticated = Class.new(StandardError)
 
+  rescue_from Pundit::NotAuthorizedError, with: :deny_access
+
   before_action :set_locale
 
   helper_method :current_user, :signed_in?
@@ -21,6 +23,12 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= session[:user_id] ? User.find(session[:user_id]) : nil
+  end
+
+  protected
+
+  def deny_access
+    render file: 'public/403.slim'
   end
 
   private
