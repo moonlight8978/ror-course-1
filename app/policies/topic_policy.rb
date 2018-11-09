@@ -1,13 +1,6 @@
 class TopicPolicy < ApplicationPolicy
-  def read?
+  def show?
     return true if not_user?
-
-    user.can_interact_with_category?(record.category)
-  end
-
-  def create?
-    return false if guest?
-    return true if user.has_role?(:moderator)
 
     user.can_interact_with_category?(record.category)
   end

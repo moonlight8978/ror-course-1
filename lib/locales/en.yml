@@ -37,7 +37,17 @@ en:
         last_topic:
           blank: No topics
           started_by: Started by
-
+      show:
+        new_topic: New topic
+        row_headers:
+          name: Topics
+          posts_count: Posts
+          last_post: Last post
+        topics:
+          empty: No topics
+          started_by: Started by
+          last_post:
+            posted_by: Posted by
   helpers:
     label:
       user:

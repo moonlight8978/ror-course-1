@@ -1,0 +1,84 @@
+@import 'utils/all';
+
+.category-screen {
+  .category-header {
+    margin-bottom: 1rem;
+
+    .pagination {
+      float: right;
+    }
+  }
+
+  .topic-list-header {
+    background-color: $background-highlight;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .topic-list-item {
+    position: relative;
+
+    .voting-container {
+      display: flex;
+      align-items: center;
+      color: $text-muted;
+
+      .vote {
+        display: flex;
+        flex-direction: column;
+
+        .vote-up {
+          margin-bottom: -0.25em;
+        }
+
+        .vote-down {
+          margin-top: -0.25em;
+        }
+
+        svg {
+          font-size: 2em;
+
+          path {
+            transition: color 0.2s ease;
+
+            &:hover {
+              color: $vote-highlight;
+            }
+          }
+        }
+      }
+
+      .score {
+        margin-left: 0.5rem;
+        font-size: 1.25em;
+      }
+    }
+
+    .topic-started-by,
+    .post-posted-by {
+      font-size: 0.9em;
+      color: $text-muted;
+    }
+
+    .topic-creator-name,
+    .post-creator-name {
+      font-size: 0.9em;
+      color: $text-primary;
+    }
+
+    .post-divider {
+      position: absolute;
+      left: -1rem;
+      right: -1rem;
+      bottom: -1rem;
+      height: 1px;
+      background-color: $background-highlight;
+    }
+
+    &:last-child {
+      .post-divider {
+        display: none;
+      }
+    }
+  }
+}
