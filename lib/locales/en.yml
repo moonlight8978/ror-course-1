@@ -2,11 +2,14 @@ en:
   welcome: Welcome
   views:
     navbar:
-      home: Home
+      home: CLvOZ
       dashboard: Dashboard
       dropdown:
         sign_out: Sign out
         settings: Settings
+      guest:
+        sign_in: Sign in
+        sign_up: Sign up
     footer:
       links: Links
       team: Team 20cm
