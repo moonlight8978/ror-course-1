@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   Unauthenticated = Class.new(StandardError)
 
   rescue_from Pundit::NotAuthorizedError, with: :deny_access
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   before_action :set_locale
 
@@ -29,6 +30,10 @@ class ApplicationController < ActionController::Base
 
   def deny_access
     render file: 'public/403.slim'
+  end
+
+  def record_not_found
+    render file: 'public/404.slim'
   end
 
   private
