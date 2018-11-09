@@ -5,8 +5,11 @@ FactoryBot.define do
     name { "#{Faker::Football.player} #{SecureRandom.uuid}" }
     status { :opening }
 
-    after(:create) do |topic|
-      create(:post, topic: topic, creator: topic.creator)
+    first_post do
+      association :post,
+        topic: @instance,
+        creator: @instance.creator,
+        category: @instance.category
     end
 
     trait :with_posts do

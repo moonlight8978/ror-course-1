@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_107_134_430) do
+ActiveRecord::Schema.define(version: 20_181_109_132_609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -58,11 +58,12 @@ ActiveRecord::Schema.define(version: 20_181_107_134_430) do
     t.bigint 'category_id'
     t.string 'name'
     t.integer 'status'
-    t.integer 'score', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'first_post_id'
     t.index ['category_id'], name: 'index_topics_on_category_id'
     t.index ['creator_id'], name: 'index_topics_on_creator_id'
+    t.index ['first_post_id'], name: 'index_topics_on_first_post_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -78,12 +79,11 @@ ActiveRecord::Schema.define(version: 20_181_107_134_430) do
 
   create_table 'votings', force: :cascade do |t|
     t.bigint 'voter_id'
-    t.string 'votable_type'
-    t.bigint 'votable_id'
+    t.bigint 'post_id'
     t.integer 'value'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index %w[votable_type votable_id], name: 'index_votings_on_votable_type_and_votable_id'
+    t.index ['post_id'], name: 'index_votings_on_post_id'
     t.index ['voter_id'], name: 'index_votings_on_voter_id'
   end
 
