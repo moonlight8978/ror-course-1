@@ -43,7 +43,9 @@ db-migrate:
 	@docker-compose run --rm ${SERVER} rake db:migrate
 
 db-reset:
-	@docker-compose run --rm ${SERVER} rake db:reset data:score
+	@docker-compose down
+	@docker-compose run --rm ${SERVER} rake db:reset data:score data:counter
+	@docker-compose up -d
 
 generate:
 	@docker-compose run -u $$(id -u):$$(id -g) --rm ${SERVER} rails g $(filter-out $@,$(MAKECMDGOALS))

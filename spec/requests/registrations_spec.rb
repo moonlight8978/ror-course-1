@@ -19,10 +19,8 @@ RSpec.describe 'Registrations', type: :request do
 
       subject { post sign_up_path, params: { user: registration_params } }
 
-      context 'with invalid/missing params' do
-        let(:registration_params) do
-          Hash[password: '1111', email: user.email]
-        end
+      context 'with invalid params' do
+        let(:registration_params) { Hash[password: '1111', email: user.email] }
 
         it 'does not make any changes' do
           expect { subject }.not_to change { User.count }

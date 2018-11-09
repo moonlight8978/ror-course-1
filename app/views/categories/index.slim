@@ -1,0 +1,20 @@
+= breadcrumbs_for \
+  Hash[title: t('views.breadcrumbs.categories')]
+
+= content_for :title do
+  = t('views.categories.index.title')
+
+.categories-screen
+  .category-list-container.card
+    .category-list-header.row-list-header
+      .row
+        .col.s6
+          = t('views.categories.index.row_headers.name')
+        .col.s1.center-align
+          = t('views.categories.index.row_headers.topics_count')
+        .col.s1.center-align
+          = t('views.categories.index.row_headers.posts_count')
+        .col.s4
+          = t('views.categories.index.row_headers.last_topic')
+    .category-list.row-list
+      = render(@categories) || t('views.categories.index.empty')
