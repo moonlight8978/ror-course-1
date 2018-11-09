@@ -1,5 +1,5 @@
 class TestController < ApplicationController
-  before_action :authenticate_user!
-
-  def index; end
+  def index
+    render file: 'public/404.slim'
+  end
 end
