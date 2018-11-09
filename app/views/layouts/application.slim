@@ -7,7 +7,9 @@ html
     = render 'layouts/navbar'
     = yield :breadcrumbs
 
-    #appContainer.bs-container
-      = yield
+    .row
+      .col.s12
+        #appContainer.bs-container
+          = yield
 
     = render 'layouts/footer'
