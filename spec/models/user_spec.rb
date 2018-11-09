@@ -86,4 +86,22 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#posted?' do
+    context 'when not posted by user' do
+      let(:topic) { create(:topic) }
+
+      it 'returns false' do
+        expect(user.posted?(topic)).to be_falsy
+      end
+    end
+
+    context 'when posted by user' do
+      let(:topic) { create(:topic, creator: user) }
+
+      it 'returns true' do
+        expect(user.posted?(topic)).to be_truthy
+      end
+    end
+  end
 end

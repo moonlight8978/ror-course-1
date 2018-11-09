@@ -14,6 +14,7 @@
         .truncate
           span.topic-started-by
             = t('views.categories.show.topics.started_by')
+            | :
           =< link_to topic.creator.username, user_path(topic.creator),
             class: 'topic-creator-name'
   .col.s1.center-align.posts-count
@@ -23,6 +24,7 @@
     .truncate
       span.post-posted-by
         = t('views.categories.show.topics.last_post.posted_by')
+        | :
       =< link_to topic.last_post.creator.username, user_path(topic.last_post.creator),
         class: 'post-creator-name'
   .post-divider

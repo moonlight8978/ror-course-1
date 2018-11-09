@@ -48,6 +48,10 @@ class User < ApplicationRecord
     !banned_categories.pluck(:id).include?(category.try(:id) || category)
   end
 
+  def posted?(postable)
+    id == postable.creator_id
+  end
+
   private
 
   def set_default_role

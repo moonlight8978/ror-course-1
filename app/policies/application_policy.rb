@@ -38,11 +38,11 @@ class ApplicationPolicy
     ultimate?
   end
 
+  protected
+
   def ultimate?
     signed_in? && user.admin?
   end
-
-  protected
 
   def signed_in?
     user.present?
