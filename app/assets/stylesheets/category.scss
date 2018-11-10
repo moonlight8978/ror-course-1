@@ -22,6 +22,7 @@
       display: flex;
       align-items: center;
       color: $text-muted;
+      font-size: 1.25em;
 
       .vote {
         display: flex;
@@ -34,35 +35,25 @@
         .vote-down {
           margin-top: -0.25em;
         }
-
-        svg {
-          font-size: 2em;
-
-          path {
-            transition: color 0.2s ease;
-
-            &:hover {
-              color: $vote-highlight;
-            }
-          }
-        }
       }
 
       .score {
-        margin-left: 0.5rem;
-        font-size: 1.25em;
+        margin-left: 0.25rem;
       }
+    }
+
+    .topic-metadata,
+    .post-metadata {
+      font-size: 0.9em;
     }
 
     .topic-started-by,
     .post-posted-by {
-      font-size: 0.9em;
       color: $text-muted;
     }
 
     .topic-creator-name,
     .post-creator-name {
-      font-size: 0.9em;
       color: $text-primary;
     }
 

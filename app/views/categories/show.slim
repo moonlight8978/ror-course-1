@@ -1,5 +1,5 @@
 = breadcrumbs_for \
-  Hash[path: root_path, title: t('views.navbar.home')],
+  Hash[path: root_path, title: t('views.breadcrumbs.categories')],
   Hash[title: @category.name]
 
 = content_for :title
@@ -17,11 +17,11 @@
   .topic-list-container.card
     .topic-list-header.row-list-header
       .row
-        .col.s8
+        .col.s7
           = t('views.categories.show.row_headers.name')
         .col.s1.center-align
           = t('views.categories.show.row_headers.posts_count')
-        .col.s3
+        .col.s4
           = t('views.categories.show.row_headers.last_post')
     .topic-list.row-list
       = render(partial: 'categories/topic', collection: @topics) || t('views.categories.show.topics.empty')

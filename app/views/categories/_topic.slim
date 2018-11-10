@@ -1,6 +1,6 @@
 .row.topic-list-item
-  .col.s8
-    .row
+  .col.s7
+    .row.valign-wrapper
       .col.s1
         .voting-container
           .vote
@@ -11,20 +11,30 @@
       .col.s11
         .truncate
           = link_to topic.name, topic_path(topic), class: 'topic-name'
-        .truncate
+        .truncate.topic-metadata
           span.topic-started-by
             = t('views.categories.show.topics.started_by')
             | :
           =< link_to topic.creator.username, user_path(topic.creator),
             class: 'topic-creator-name'
   .col.s1.center-align.posts-count
-    = topic.posts.count
-  .col.s3
-    = time_ago_in_words(topic.last_post.created_at)
-    .truncate
-      span.post-posted-by
-        = t('views.categories.show.topics.last_post.posted_by')
-        | :
-      =< link_to topic.last_post.creator.username, user_path(topic.last_post.creator),
-        class: 'post-creator-name'
+    = topic.posts.size
+  .col.s4
+    - if topic.last_post.present?
+      .truncate
+        = topic.last_post.content
+      .row.post-metadata
+        .col.s8
+          .truncate
+            span.post-posted-by
+              = t('views.categories.show.topics.last_post.posted_by')
+              | :
+            =< link_to topic.last_post.creator.username, user_path(topic.last_post.creator),
+              class: 'post-creator-name'
+
+        .col.s4
+          .truncate.right-align = time_ago_in_words(topic.last_post.created_at)
+    - else
+      .truncate = t('views.categories.show.topics.last_post.empty')
+
   .post-divider

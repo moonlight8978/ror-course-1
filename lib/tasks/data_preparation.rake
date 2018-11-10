@@ -3,7 +3,7 @@ namespace :data do
   task score: :environment do
     puts 'Calculating post and topic score...'
 
-    posts = Post.all.map do |post|
+    posts = Post.includes(:votings).all.map do |post|
       post.tap { post.score = calculate_voting_score(post) }
     end
     Post.import(posts, on_duplicate_key_update: [:score])
@@ -23,6 +23,10 @@ namespace :data do
       %i[topics posts].each do |association|
         Category.reset_counters(category.id, association)
       end
+    end
+
+    Topic.all.each do |topic|
+      Topic.reset_counters(topic.id, :posts)
     end
 
     puts 'Done'

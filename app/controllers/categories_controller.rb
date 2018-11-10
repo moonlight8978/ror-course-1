@@ -6,7 +6,8 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     authorize @category
-    @topics = @category.topics.includes(:creator, last_post: :creator)
+    @topics = @category.topics
+      .includes(:creator, :first_post, last_post: :creator)
       .page(params[:page])
   end
 end

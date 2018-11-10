@@ -54,7 +54,7 @@ RSpec.describe 'categories/show', type: :view do
 
         it 'shows the posts count' do
           expect(rendered)
-            .to have_css('.topic-list-item:first-child .posts-count', text: 4)
+            .to have_css('.topic-list-item:first-child .posts-count', text: 3)
         end
       end
     end

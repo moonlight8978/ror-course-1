@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'VisitCategoryPosts', type: :feature do
+RSpec.feature 'User visit category page', type: :feature do
   let(:user) { create(:user) }
   let!(:category) { create(:category) }
   let!(:topics) { create_list(:topic, 13, category: category) }
