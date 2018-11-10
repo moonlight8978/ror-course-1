@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TopicPolicy do
   let(:category) { create(:category) }
   let(:topic) { create(:topic, category: category, creator: user) }
-  let(:post) { topic.posts.first }
+  let(:post) { topic.first_post }
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
   let(:moderator) { create(:user, :moderator) }

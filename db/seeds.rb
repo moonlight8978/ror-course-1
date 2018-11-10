@@ -95,19 +95,32 @@ end
 
 seed :topics do
   topics = []
+  first_posts = []
 
   Category.all.each do |category|
     users = users_can_interact_with_category(category)
 
     20.times do
-      topics << category.topics.build(
+      creator = users.sample
+
+      first_post = category.posts.build(
+        creator: creator,
+        content: Faker::Lorem.paragraph(2, true)
+      )
+
+      topic = category.topics.build(
         name: "#{Faker::Football.player} #{SecureRandom.uuid}",
         status: :opening,
-        creator: users.sample
+        creator: creator,
+        first_post: first_post
       )
+
+      first_posts << first_post
+      topics << topic
     end
   end
 
+  Post.import(first_posts, on_duplicate_key_ignore: true)
   Topic.import(topics, on_duplicate_key_ignore: true)
 end
 
@@ -134,29 +147,13 @@ seed :votings do
   Category.all.each do |category|
     users = users_can_interact_with_category(category)
 
-    category.topics.each do |topic|
+    category.posts.each do |post|
       rand(5).times do
         votings << Voting.new(
-          votable: topic,
+          post: post,
           voter: users.sample,
           value: [-1, 1].sample
         )
-      end
-    end
-  end
-
-  Category.all.each do |category|
-    users = users_can_interact_with_category(category)
-
-    category.topics.each do |topic|
-      topic.posts.each do |post|
-        rand(5).times do
-          votings << Voting.new(
-            votable: post,
-            voter: users.sample,
-            value: [-1, 1].sample
-          )
-        end
       end
     end
   end

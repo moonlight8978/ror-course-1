@@ -3,20 +3,16 @@ namespace :data do
   task score: :environment do
     puts 'Calculating post and topic score...'
 
-    votable_subjects = [Post, Topic]
-
-    votable_subjects.each do |subject|
-      votables = subject.includes(:votings).all.map do |votable|
-        votable.tap { votable.score = calculate_voting_score(votable) }
-      end
-      subject.import(votables, on_duplicate_key_update: [:score])
+    posts = Post.all.map do |post|
+      post.tap { post.score = calculate_voting_score(post) }
     end
+    Post.import(posts, on_duplicate_key_update: [:score])
 
     puts 'Done'
   end
 
-  def calculate_voting_score(votable)
-    votable.votings.inject(0) { |sum, vote| sum + vote.value }
+  def calculate_voting_score(post)
+    post.votings.inject(0) { |sum, vote| sum + vote.value }
   end
 
   desc 'Calculate counter cache columns after seeding'
