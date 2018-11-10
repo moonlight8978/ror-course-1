@@ -147,15 +147,13 @@ seed :votings do
   Category.all.each do |category|
     users = users_can_interact_with_category(category)
 
-    category.topics.each do |topic|
-      topic.posts.each do |post|
-        rand(5).times do
-          votings << Voting.new(
-            post: post,
-            voter: users.sample,
-            value: [-1, 1].sample
-          )
-        end
+    category.posts.each do |post|
+      rand(5).times do
+        votings << Voting.new(
+          post: post,
+          voter: users.sample,
+          value: [-1, 1].sample
+        )
       end
     end
   end

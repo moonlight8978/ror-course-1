@@ -7,7 +7,7 @@ FactoryBot.define do
 
     first_post do
       association :post,
-        topic: @instance,
+        topic: nil,
         creator: @instance.creator,
         category: @instance.category
     end
