@@ -5,7 +5,7 @@ class CategoryPolicy < ApplicationPolicy
     user.can_interact_with_category?(record)
   end
 
-  def patrol?
+  def manage?
     return false if guest?
     return true if user.admin?
 

@@ -1,0 +1,29 @@
+= breadcrumbs_for \
+  Hash[path: root_path, title: t('views.breadcrumbs.categories')],
+  Hash[title: @category.name]
+
+= content_for :title
+  = @category.name
+
+.category-screen
+  .row.valign-wrapper.category-header
+    .col.s3
+      = button_if_signed_in new_category_topic_path(@category) do
+        i.material-icons.left add
+        = t('views.categories.show.new_topic')
+
+    .col.s9 = paginate @topics
+
+  .topic-list-container.card
+    .topic-list-header.row-list-header
+      .row
+        .col.s7
+          = t('views.categories.show.row_headers.name')
+        .col.s1.center-align
+          = t('views.categories.show.row_headers.posts_count')
+        .col.s4
+          = t('views.categories.show.row_headers.last_post')
+    .topic-list.row-list
+      = render(partial: 'categories/topic', collection: @topics) || t('views.categories.show.topics.empty')
+
+  = paginate @topics

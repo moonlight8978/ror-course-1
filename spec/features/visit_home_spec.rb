@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'VisitHomes', type: :feature do
+RSpec.feature 'User visits home page', type: :feature do
   let!(:categories) { create_list(:category, 3) }
   let!(:topic) { create(:topic, category: categories.first, name: 'Topic 1') }
 

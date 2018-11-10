@@ -32,7 +32,7 @@ RSpec.describe CategoryPolicy do
     end
   end
 
-  permissions :patrol? do
+  permissions :manage? do
     it 'does not grant access to guess' do
       expect(subject).not_to permit(nil, category)
     end

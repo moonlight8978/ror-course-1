@@ -45,13 +45,14 @@ $ make credentials
 
 ```bash
 $ make db-reset
-# You can browse the db using pgAdmin4 by visit http://localhost:9999
+# You can browse the db using pgAdmin4 by visit http://localhost:9696
 ```
 
 - Run the stack
 
 ```bash
 $ make start
+# Visit http://localhost:6969
 # And stop the stack
 $ make stop
 ```

@@ -11,7 +11,7 @@ RSpec.describe TopicPolicy do
 
   subject { described_class }
 
-  permissions :read? do
+  permissions :show? do
     it 'does not grant access to banned user' do
       expect(user).to receive(:can_interact_with_category?).with(category)
         .and_return(false)
@@ -20,30 +20,6 @@ RSpec.describe TopicPolicy do
 
     it 'grants access to guest' do
       expect(subject).to permit(nil, post)
-    end
-
-    it 'grants access to moderator' do
-      expect(subject).to permit(moderator, post)
-    end
-
-    it 'grants access to admin' do
-      expect(subject).to permit(admin, post)
-    end
-  end
-
-  permissions :create? do
-    it 'does not grant access to guest' do
-      expect(subject).not_to permit(nil, post)
-    end
-
-    it 'does not grant access to banned user' do
-      expect(user).to receive(:can_interact_with_category?).with(category)
-        .and_return(false)
-      expect(subject).not_to permit(user, post)
-    end
-
-    it 'grants access to not banned user' do
-      expect(subject).to permit(user, post)
     end
 
     it 'grants access to moderator' do

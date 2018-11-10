@@ -1,5 +1,9 @@
 FactoryBot.define do
   factory :topic do
+    transient do
+      count { 0 }
+    end
+
     association :creator, factory: :user
     category
     name { "#{Faker::Football.player} #{SecureRandom.uuid}" }
@@ -14,7 +18,7 @@ FactoryBot.define do
 
     trait :with_posts do
       after(:create) do |topic|
-        create_list(:post, (10..20).to_a.sample, topic: topic)
+        create_list(:post, (10..20).to_a.sample, topic: topic) if count > 0
       end
     end
   end

@@ -48,6 +48,7 @@ db-reset:
 	@docker-compose up -d
 
 generate:
+	@sudo chmod 777 -R ./log/bullet.log
 	@docker-compose run -u $$(id -u):$$(id -g) --rm ${SERVER} rails g $(filter-out $@,$(MAKECMDGOALS))
 
 console:

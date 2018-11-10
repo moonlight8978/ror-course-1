@@ -8,6 +8,8 @@ class Topic < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :first_post, class_name: 'Post'
 
+  has_one :last_post, -> { order(created_at: :desc) }, class_name: 'Post'
+
   has_many :posts
 
   validates :name, presence: true
