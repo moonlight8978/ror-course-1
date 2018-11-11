@@ -8,27 +8,9 @@ RSpec.describe 'categories/show', type: :view do
 
   before { assign(:category, category) }
 
-  def mock_policy(user)
-    without_partial_double_verification do
-      allow(view).to receive(:policy) do |record|
-        Pundit.policy(user, record)
-      end
-    end
-  end
-
-  def mock_authentication
-    without_partial_double_verification do
-      allow(view).to receive(:signed_in?).and_return(false)
-    end
-  end
-
-  def paginate(array = Topic.none)
-    assign(:topics, Kaminari.paginate_array(array).page(1))
-  end
-
   context 'without authentication' do
     before do
-      mock_authentication
+      mock_authentication(false)
       paginate
     end
 
@@ -42,7 +24,7 @@ RSpec.describe 'categories/show', type: :view do
 
     describe 'topic list' do
       context 'no topics' do
-        before { paginate }
+        before { paginate([]) }
 
         it 'shows the placeholder' do
           render
@@ -87,14 +69,12 @@ RSpec.describe 'categories/show', type: :view do
   end
 
   context 'with authentication' do
-    before { paginate }
+    before { paginate([]) }
 
     describe 'new thread button' do
       context 'guest' do
         before do
-          without_partial_double_verification do
-            allow(view).to receive(:signed_in?).and_return(false)
-          end
+          mock_authentication(false)
           render
         end
 
@@ -106,9 +86,7 @@ RSpec.describe 'categories/show', type: :view do
 
       context 'signed in user' do
         before do
-          without_partial_double_verification do
-            allow(view).to receive(:signed_in?).and_return(true)
-          end
+          mock_authentication(true)
           render
         end
 

@@ -3,19 +3,11 @@ require 'rails_helper'
 RSpec.describe 'layouts/application', type: :view do
   let(:user) { create(:user) }
 
-  before do
-    without_partial_double_verification do
-      allow(view).to receive(:policy) do |record|
-        Pundit.policy(user, record)
-      end
-    end
-  end
+  before { mock_policy(user) }
 
   context 'when guest visits' do
     before do
-      without_partial_double_verification do
-        allow(view).to receive(:signed_in?).and_return(false)
-      end
+      mock_authentication(false)
       render
     end
 
@@ -34,9 +26,7 @@ RSpec.describe 'layouts/application', type: :view do
 
   context 'when user is already signed in' do
     before do
-      without_partial_double_verification do
-        allow(view).to receive(:signed_in?).and_return(true)
-      end
+      mock_authentication(true)
       render
     end
 
