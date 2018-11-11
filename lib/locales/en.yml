@@ -57,6 +57,9 @@ en:
       user:
         email: Email
         password: Password
+    authorization:
+      authentication:
+        tooltip: Login required
   activerecord:
     models:
       user: User
@@ -64,6 +67,10 @@ en:
       user:
         email: Email
         password: Password
+      topic:
+        statuses:
+          opening: Opening
+          locked: Locked
     errors:
       models:
         user:

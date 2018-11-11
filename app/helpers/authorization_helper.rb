@@ -6,7 +6,10 @@ module AuthorizationHelper
       content_tag(
         :button,
         class: 'btn tooltipped',
-        data: { position: 'bottom', tooltip: 'Login required' },
+        data: {
+          position: 'bottom',
+          tooltip: t('helpers.authorization.authentication.tooltip')
+        },
         &block
       )
     end
