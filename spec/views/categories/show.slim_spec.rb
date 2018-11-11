@@ -3,8 +3,18 @@ require 'rails_helper'
 RSpec.describe 'categories/show', type: :view do
   let(:category) { create(:category) }
   let(:topics) { create_list(:topic, 5, category: category) }
+  let(:user) { create(:user) }
+  let(:manager) { create(:user, :admin) }
 
   before { assign(:category, category) }
+
+  def mock_policy(user)
+    without_partial_double_verification do
+      allow(view).to receive(:policy) do |record|
+        Pundit.policy(user, record)
+      end
+    end
+  end
 
   def mock_authentication
     without_partial_double_verification do
@@ -45,6 +55,7 @@ RSpec.describe 'categories/show', type: :view do
 
         before do
           assign(:topics, paginate(topics))
+          mock_policy(user)
           render
         end
 
@@ -63,6 +74,7 @@ RSpec.describe 'categories/show', type: :view do
 
         before do
           assign(:topics, paginate([locked_topic]))
+          mock_policy(user)
           render
         end
 
