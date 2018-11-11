@@ -8,6 +8,7 @@ FactoryBot.define do
     category
     name { "#{Faker::Football.player} #{SecureRandom.uuid}" }
     status { :opening }
+    deleted_at { nil }
 
     first_post do
       association :post,
