@@ -1,42 +1,73 @@
-.row.topic-list-item
-  .col.s7
-    .row.valign-wrapper
-      .col.s1
-        .voting-container
-          .vote
-            i.fas.fa-caret-up.vote-up
-            i.fas.fa-caret-down.vote-down
-          .score
-            = topic.score
-      .col.s11
-        .truncate.topic-name-with-status
-          - if topic.locked?
-            span.new.badge.blue-grey data-badge-caption=translate_enum(topic, :status)
-          = link_to topic.name, topic_path(topic), class: 'topic-name'
-        .truncate.topic-metadata
-          span.topic-started-by
-            = t('views.categories.show.topics.started_by')
-            | :
-          =< link_to topic.creator.username, user_path(topic.creator),
-            class: 'topic-creator-name'
-  .col.s1.center-align.posts-count
-    = topic.posts.size
-  .col.s4
-    - if topic.last_post.present?
-      .truncate
-        = topic.last_post.content
-      .row.post-metadata
-        .col.s8
-          .truncate
-            span.post-posted-by
-              = t('views.categories.show.topics.last_post.posted_by')
+- if policy(topic).show?
+  .row.topic-list-item
+    .col.s7
+      .row.valign-wrapper
+        .col.s1
+          .voting-container
+            .vote
+              i.fas.fa-caret-up.vote-up
+              i.fas.fa-caret-down.vote-down
+            .score
+              = topic.score
+        .col.s11
+          .truncate.topic-name-with-status
+            - if topic.deleted?
+              span.new.badge.red[
+                data-badge-caption=t('activerecord.attributes.deletable.deleted')
+              ]
+
+            - if topic.locked?
+              span.new.badge.blue-grey data-badge-caption=translate_enum(topic, :status)
+
+            = link_to topic.name, topic_path(topic), class: 'topic-name'
+          .truncate.topic-metadata
+            span.topic-started-by
+              = t('views.categories.show.topics.started_by')
               | :
-            =< link_to topic.last_post.creator.username, user_path(topic.last_post.creator),
-              class: 'post-creator-name'
+            =< link_to topic.creator.username, user_path(topic.creator),
+              class: 'topic-creator-name'
+    .col.s1.center-align.posts-count
+      = topic.posts.size
+    .col.s4
+      - if topic.last_post.present?
+        .truncate
+          = topic.last_post.content
+        .row.post-metadata
+          .col.s8
+            .truncate
+              span.post-posted-by
+                = t('views.categories.show.topics.last_post.posted_by')
+                | :
+              =< link_to topic.last_post.creator.username, user_path(topic.last_post.creator),
+                class: 'post-creator-name'
 
-        .col.s4
-          .truncate.right-align = time_ago_in_words(topic.last_post.created_at)
-    - else
-      .truncate = t('views.categories.show.topics.last_post.empty')
+          .col.s4
+            .truncate.right-align = time_ago_in_words(topic.last_post.created_at)
+      - else
+        .truncate = t('views.categories.show.topics.last_post.empty')
 
-  .post-divider
+    .post-divider
+- else
+  .row.topic-list-item.valign-wrapper
+    .col.s7
+      .row.valign-wrapper
+        .col.s1
+          .voting-container
+            .vote
+              i.fas.fa-caret-up.vote-up
+              i.fas.fa-caret-down.vote-down
+            .score
+              = t('views.categories.show.topics.deleted.votes_count')
+        .col.s11
+          .truncate.topic-metadata
+            span.topic-started-by
+              = t('views.categories.show.topics.started_by')
+              | :
+            =< link_to topic.creator.username, user_path(topic.creator),
+              class: 'topic-creator-name'
+    .col.s1.center-align
+      = t('views.categories.show.topics.deleted.posts_count')
+    .col.s4
+      = t('views.categories.show.topics.deleted.message')
+
+    .post-divider

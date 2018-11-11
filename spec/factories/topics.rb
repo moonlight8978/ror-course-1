@@ -22,5 +22,9 @@ FactoryBot.define do
         create_list(:post, (10..20).to_a.sample, topic: topic) if count > 0
       end
     end
+
+    trait :deleted do
+      deleted_at { Time.current }
+    end
   end
 end

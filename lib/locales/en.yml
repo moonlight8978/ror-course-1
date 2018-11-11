@@ -52,6 +52,10 @@ en:
           last_post:
             posted_by: Posted by
             empty: No replies
+          deleted:
+            message: Topic has been deleted
+            posts_count: '-'
+            votes_count: '-'
   helpers:
     label:
       user:
@@ -71,6 +75,8 @@ en:
         statuses:
           opening: Opening
           locked: Locked
+      deletable:
+        deleted: Deleted
     errors:
       models:
         user:
