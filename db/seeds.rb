@@ -166,7 +166,7 @@ seed :votings do
 end
 
 seed :locked_topics do
-  locked_topic_ids = random(rand(10..15), Topic.count)
+  locked_topic_ids = random(Topic.count, rand(10..15))
   locked_topics = Topic.where(id: locked_topic_ids)
   locked_topics = locked_topics.map do |topic|
     topic.tap { topic.status = :locked }
@@ -176,7 +176,7 @@ seed :locked_topics do
 end
 
 seed :deleted_topics do
-  deleted_topic_ids = random(rand(20..30), Topic.count)
+  deleted_topic_ids = random(Topic.count, rand(20..30))
   deleted_topics = Topic.where(id: deleted_topic_ids, status: :opening)
   deleted_topics = deleted_topics.map do |topic|
     topic.tap { topic.deleted_at = Time.current }
@@ -186,7 +186,7 @@ seed :deleted_topics do
 end
 
 seed :deleted_posts do
-  deleted_post_ids = random(rand(500..600), Post.count)
+  deleted_post_ids = random(Post.count, rand(500..600))
   deleted_posts = Post.where(id: deleted_post_ids)
   deleted_posts = deleted_posts.map do |post|
     post.tap { post.deleted_at = Time.current }
