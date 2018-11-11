@@ -57,6 +57,20 @@ RSpec.describe 'categories/show', type: :view do
             .to have_css('.topic-list-item:first-child .posts-count', text: 3)
         end
       end
+
+      context 'with locked topic' do
+        let!(:locked_topic) { create(:topic, status: :locked) }
+
+        before do
+          assign(:topics, paginate([locked_topic]))
+          render
+        end
+
+        it 'shows the locked badge' do
+          expect(rendered)
+            .to have_css('.badge[data-badge-caption="Locked"]')
+        end
+      end
     end
   end
 

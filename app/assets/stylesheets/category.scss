@@ -42,6 +42,14 @@
       }
     }
 
+    .topic-name-with-status {
+      .badge {
+        float: none;
+        margin-left: 0;
+        margin-right: 14px;
+      }
+    }
+
     .topic-metadata,
     .post-metadata {
       font-size: 0.9em;

@@ -28,6 +28,8 @@ Metrics/LineLength:
     - 'db/**/*'
     - 'spec/*_helper.rb'
     - 'spec/support/*'
+Metrics/MethodLength:
+  Enabled: false
 Naming/PredicateName:
   NamePrefixBlacklist:
     - is_

@@ -9,7 +9,9 @@
           .score
             = topic.score
       .col.s11
-        .truncate
+        .truncate.topic-name-with-status
+          - if topic.locked?
+            span.new.badge.blue-grey data-badge-caption=translate_enum(topic, :status)
           = link_to topic.name, topic_path(topic), class: 'topic-name'
         .truncate.topic-metadata
           span.topic-started-by
