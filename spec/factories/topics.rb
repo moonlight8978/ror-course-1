@@ -26,5 +26,9 @@ FactoryBot.define do
     trait :deleted do
       deleted_at { Time.current }
     end
+
+    trait :locked do
+      status { :locked }
+    end
   end
 end
