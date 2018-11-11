@@ -1,7 +1,9 @@
 class Topic < ApplicationRecord
+  include SoftDeletable
+
   delegate :score, to: :first_post
 
-  enum status: { opening: 0, locked: 5, deleted: 10 }
+  enum status: { opening: 0, locked: 5 }
 
   # TODO: optimize counter cache
   belongs_to :category, counter_cache: true
