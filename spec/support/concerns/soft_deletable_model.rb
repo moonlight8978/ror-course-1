@@ -1,11 +1,7 @@
 RSpec.shared_examples 'soft_deletable_model' do
   let(:model) { described_class }
-  let(:deleted) do
-    create(described_class.name.underscore.to_sym, deleted_at: Time.current)
-  end
-  let(:visible) do
-    create(described_class.name.underscore.to_sym, deleted_at: nil)
-  end
+  let(:deleted) { create(described_class.name.underscore.to_sym, :deleted) }
+  let(:visible) { create(described_class.name.underscore.to_sym) }
 
   describe '.visible' do
     it 'returns the objects which have not been deleted yet' do
