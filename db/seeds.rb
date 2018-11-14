@@ -15,6 +15,41 @@ def random(max, count)
   Array.new(count).map { rand(max) }
 end
 
+def get_quantity(model)
+  quantities = {
+    development: {
+      user: 100,
+      category: 20,
+      banning: 10,
+      topic: 20,
+      post: 30,
+      voting: rand(5),
+      locked_topic: rand(10..15),
+      deleted_topic: rand(20..30),
+      deleted_post: rand(500..600)
+    },
+    production: {
+      user: 30,
+      category: 7,
+      banning: 4,
+      topic: 20,
+      post: 5,
+      voting: rand(3),
+      locked_topic: 10,
+      deleted_topic: 10,
+      deleted_post: 50
+    }
+  }
+
+  if Rails.env.development?
+    quantities.dig(:development, model)
+  elsif Rails.env.production?
+    quantities.dig(:production, model)
+  else
+    raise StandardError
+  end
+end
+
 # Seed
 seed :users do
   users = []
@@ -42,7 +77,7 @@ seed :users do
     )
   end
 
-  100.times do
+  get_quantity(:user).times do
     users << User.create(
       email: "#{SecureRandom.hex(10)}_#{Faker::Internet.email}",
       username: "#{Faker::Dota.player} #{SecureRandom.hex(10)}",
@@ -56,7 +91,7 @@ end
 seed :categories do
   categories = []
 
-  20.times do
+  get_quantity(:category).times do
     categories << Category.new(
       name: "#{Faker::Football.team} #{SecureRandom.uuid}"
     )
@@ -86,7 +121,7 @@ seed :category_bannings do
 
   Category.all.each do |category|
     users = User.where(role: :user)
-    10.times do
+    get_quantity(:banning).times do
       category_bannings << CategoryBanning.new(
         category: category,
         user: users.sample
@@ -104,12 +139,12 @@ seed :topics do
   Category.all.each do |category|
     users = users_can_interact_with_category(category)
 
-    20.times do
+    get_quantity(:topic).times do
       creator = users.sample
 
       first_post = category.posts.build(
         creator: creator,
-        content: Faker::Lorem.paragraph(2, true)
+        content: Faker::Lorem.paragraph(3, true)
       )
 
       topic = category.topics.build(
@@ -133,7 +168,7 @@ seed :posts do
 
   Topic.all.each do |topic|
     users = users_can_interact_with_category(topic.category)
-    30.times do
+    get_quantity(:post).times do
       posts << topic.posts.build(
         category: topic.category,
         creator: users.sample,
@@ -152,7 +187,7 @@ seed :votings do
     users = users_can_interact_with_category(category)
 
     category.posts.each do |post|
-      rand(5).times do
+      get_quantity(:voting).times do
         votings << Voting.new(
           post: post,
           voter: users.sample,
@@ -166,7 +201,7 @@ seed :votings do
 end
 
 seed :locked_topics do
-  locked_topic_ids = random(Topic.count, rand(10..15))
+  locked_topic_ids = random(Topic.count, get_quantity(:locked_topic))
   locked_topics = Topic.where(id: locked_topic_ids)
   locked_topics = locked_topics.map do |topic|
     topic.tap { topic.status = :locked }
@@ -176,7 +211,7 @@ seed :locked_topics do
 end
 
 seed :deleted_topics do
-  deleted_topic_ids = random(Topic.count, rand(20..30))
+  deleted_topic_ids = random(Topic.count, get_quantity(:deleted_topic))
   deleted_topics = Topic.where(id: deleted_topic_ids, status: :opening)
   deleted_topics = deleted_topics.map do |topic|
     topic.tap { topic.deleted_at = Time.current }
@@ -186,7 +221,7 @@ seed :deleted_topics do
 end
 
 seed :deleted_posts do
-  deleted_post_ids = random(Post.count, rand(500..600))
+  deleted_post_ids = random(Post.count, get_quantity(:deleted_post))
   deleted_posts = Post.where(id: deleted_post_ids)
   deleted_posts = deleted_posts.map do |post|
     post.tap { post.deleted_at = Time.current }

@@ -18,7 +18,6 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rspec-rails'
 end
 
@@ -36,6 +35,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'activerecord-import'
 gem 'draper'
+gem 'faker'
 gem 'kaminari'
 gem 'pundit'
 gem 'rails-i18n'
