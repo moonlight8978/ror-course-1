@@ -16,7 +16,7 @@ RSpec.feature 'User visit category page', type: :feature do
       visit category_path(category)
 
       expect(page).not_to have_content(category.name)
-      expect(page).to have_title('403 - Unauthorized | CLvOZ')
+      expect(page).to have_title('403 - Forbidden | CLvOZ')
     end
   end
 

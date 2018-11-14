@@ -29,11 +29,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def deny_access
-    render file: 'public/403.slim'
+    render file: 'public/errors/403.html', layout: false, status: :forbidden
   end
 
   def record_not_found
-    render file: 'public/404.slim'
+    render file: 'public/errors/404.html', layout: false, status: :not_found
   end
 
   private
