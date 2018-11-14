@@ -36,7 +36,7 @@ RSpec.describe 'Categories', type: :request do
       end
 
       it 'returns the unauthorized page' do
-        expect(response.body).to include('403 - Unauthorized')
+        expect(response.body).to include('403 - Forbidden')
       end
     end
 
