@@ -1,0 +1,47 @@
+.row.post-list-item
+  .col.s12
+    .row.post-context
+      .col.s10
+        - if post.deleted?
+          span.new.badge.red[
+            data-badge-caption=t('activerecord.attributes.deletable.deleted')
+          ]
+
+        = post.created_at
+      .col.s2.right-align.post-counter
+        - if post.first_post?
+          = t('views.topics.show.posts.original_post')
+        - else
+          | ##{start_index + post_counter}
+    - if policy(post).show?
+      .row.post-body
+        .col.s2
+          .post-creator-container
+            .post-creator-avatar
+              img.image src=asset_path('default_avatar.png')
+            .post-creator-info
+              .truncate
+                =< link_to post.creator.username, user_path(post.creator)
+              .truncate.post-creator-role
+                = translate_enum(post.creator, :role)
+
+        .col.s10
+          .post-content-wrapper
+            p.paragraph-content.post-content = post.content
+
+            .voting-containers
+              .score
+                = t('views.topics.show.posts.vote', count: post.score)
+              = link_if_signed_in '#!', class: 'vote upvote' do
+                i.fas.fa-caret-up
+                span.vote-desc
+                  = t('views.topics.show.posts.upvote')
+              = link_if_signed_in '#!', class: 'vote downvote' do
+                i.fas.fa-caret-down
+                span.vote-desc
+                  = t('views.topics.show.posts.downvote')
+
+    - else
+      div = t('views.topics.show.posts.deleted.message')
+
+    .post-divider

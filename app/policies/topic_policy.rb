@@ -16,6 +16,13 @@ class TopicPolicy < ApplicationPolicy
     category_policy.manage?
   end
 
+  def reply?
+    return false if guest?
+    return false unless user.can_interact_with_category?(record.category)
+
+    record.opening? && record.visible?
+  end
+
   private
 
   def category_policy

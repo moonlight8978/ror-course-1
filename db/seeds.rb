@@ -172,7 +172,7 @@ seed :posts do
       posts << topic.posts.build(
         category: topic.category,
         creator: users.sample,
-        content: Faker::Lorem.paragraph(2, true)
+        content: Faker::Lorem.paragraph(20, true)
       )
     end
   end
