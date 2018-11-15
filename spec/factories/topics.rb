@@ -18,8 +18,8 @@ FactoryBot.define do
     end
 
     trait :with_posts do
-      after(:create) do |topic|
-        create_list(:post, (10..20).to_a.sample, topic: topic) if count > 0
+      after(:create) do |topic, options|
+        create_list(:post, options.count, topic: topic) if options.count > 0
       end
     end
 

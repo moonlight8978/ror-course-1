@@ -19,7 +19,5 @@
 //= require_tree .
 
 $(document).ready(() => {
-  $('.materialboxed').materialbox()
-  $('.dropdown-trigger').dropdown()
-  $('.tooltipped').tooltip()
+  M.AutoInit()
 })

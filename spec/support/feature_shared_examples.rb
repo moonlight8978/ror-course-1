@@ -16,3 +16,10 @@ RSpec.shared_examples 'feature_guest_only' do |behavior|
     expect(page.current_path).to eq(root_path)
   end
 end
+
+RSpec.shared_examples 'feature_forbidden' do |behavior|
+  scenario 'sees the 403 forbidden page' do
+    instance_eval(&behavior)
+    expect(page).to have_content('Forbidden')
+  end
+end

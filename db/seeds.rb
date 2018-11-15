@@ -144,7 +144,7 @@ seed :topics do
 
       first_post = category.posts.build(
         creator: creator,
-        content: Faker::Lorem.paragraph(3, true)
+        content: Faker::Lorem.paragraph(3, true, 30)
       )
 
       topic = category.topics.build(
@@ -172,7 +172,7 @@ seed :posts do
       posts << topic.posts.build(
         category: topic.category,
         creator: users.sample,
-        content: Faker::Lorem.paragraph(20, true)
+        content: Faker::Lorem.paragraph(3, true, 30)
       )
     end
   end

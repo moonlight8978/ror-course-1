@@ -23,11 +23,11 @@ RSpec.describe 'Categories', type: :request do
 
   describe 'GET /categories/:id' do
     let(:category) { create(:category) }
-    let!(:banned) { create(:category_banning, category: category, user: user) }
+    let(:banned_user) { create(:user, banned_from: category) }
 
     context 'banned user' do
       before do
-        sign_in_as(user.email)
+        sign_in_as(banned_user.email)
         get category_path(category)
       end
 
