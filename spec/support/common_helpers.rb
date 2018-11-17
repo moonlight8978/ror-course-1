@@ -14,6 +14,6 @@ module CommonHelpers
   private
 
   def attachments_directory
-    Rails.root.join('spec', 'fixtures', 'files')
+    Rails.root.join('spec', 'factories', 'files')
   end
 end
