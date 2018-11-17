@@ -68,6 +68,12 @@ seed :users do
     role: :moderator
   )
 
+  users << User.new(
+    email: 'user@framgia.com',
+    password: '1111',
+    username: 'super super admin'
+  )
+
   10.times do
     users << User.new(
       email: "#{SecureRandom.hex(10)}_#{Faker::Internet.email}",
