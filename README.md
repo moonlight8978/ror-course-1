@@ -5,7 +5,11 @@
 
 - For research purpose
 
-### Environment
+- Production: [here](http://ec2-13-229-208-57.ap-southeast-1.compute.amazonaws.com/)
+  - Server: AWS EC2
+  - Storage: AWS S3
+
+### Development environment
 
 ```bash
 $ ruby -v
