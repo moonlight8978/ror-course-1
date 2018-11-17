@@ -6,6 +6,14 @@ class TopicPolicy < ApplicationPolicy
     not_user? || user.can_interact_with_category?(record.category)
   end
 
+  def create?
+    category_policy.show?
+  end
+
+  def new?
+    create?
+  end
+
   def update?
     return false if guest? || !user.can_interact_with_category?(record.category)
 

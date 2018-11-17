@@ -16,6 +16,8 @@ en:
       copyright: © 2018 Copyright Team 20cm
     breadcrumbs:
       categories: Home
+      topics:
+        new: Create new topic
     sessions:
       new:
         title: Sign in
@@ -69,6 +71,17 @@ en:
           downvote: Downvote
           deleted:
             message: Post has been deleted
+      new:
+        title: Create new topic
+        post_to_html: '<span class="post-to">Post to:</span> %{category}'
+        placeholder:
+          name: Topic name
+          content: Topic content
+          images: Attach one or more images
+        attach: Attach image
+        submit: Create topic
+        cancel: Back
+
   helpers:
     label:
       user:
@@ -110,3 +123,16 @@ en:
               blank: Email is required
               taken: Email has been taken
               wrong: Email does not exist
+        topic:
+          attributes:
+            name:
+              blank: Topic name is required
+        post:
+          attributes:
+            content:
+              blank: Topic name is required
+              too_long: Topic content must be less than 200 characters
+            images:
+              too_many: You cannot upload more than 5 files
+              size: Image's size must be less than 1MB
+              format: Image's format is not valid (must be png|jpg|jpeg|gif|...)

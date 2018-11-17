@@ -1,14 +1,28 @@
+@import 'utils/all';
+
 .image {
   display: block;
   width: 100%;
 }
 
 .mb {
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
 }
 
 .mt {
-  margin-top: 1rem;
+  margin-top: 1em;
+}
+
+.ml {
+  margin-left: 1em;
+}
+
+.mr {
+  margin-right: 1em;
+}
+
+.m-0 {
+  margin: 0;
 }
 
 .h-100 {
@@ -71,4 +85,16 @@
 .paragraph-content {
   white-space: pre-line;
   margin: 0;
+}
+
+form {
+  label.required {
+    &:before {
+      content: '*';
+      position: absolute;
+      right: -0.75em;
+      color: $text-danger;
+      font-weight: bold;
+    }
+  }
 }

@@ -57,6 +57,29 @@
 
       .post-content {
         margin-bottom: 1.75rem;
+
+        .post-images-container {
+          margin: 0.25em 0 0.5em;
+
+          .post-image-list {
+            margin: 0 -0.5em;
+            display: flex;
+            flex-wrap: wrap;
+          }
+
+          .post-image-item {
+            flex: 0 0 20%;
+            padding: 0 0.5em;
+            width: 20%;
+
+            .post-image-caption {
+              color: $text-muted;
+              font-style: italic;
+              font-size: 0.9em;
+              margin-bottom: 0.5em;
+            }
+          }
+        }
       }
 
       .voting-containers {

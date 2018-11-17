@@ -17,6 +17,8 @@ class Topic < ApplicationRecord
   validates :name, presence: true
   validates :status, presence: true, on: :update
 
+  accepts_nested_attributes_for :first_post
+
   before_create :set_inital_status
 
   private

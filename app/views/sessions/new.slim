@@ -14,13 +14,15 @@
             = form_with model: @user, scope: :user, url: sign_in_path, local: true do |f|
               div.row
                 .input-field.col.s12
-                  = f.text_field :email, class: classnames(invalid: @user.errors[:email].present?)
-                  = f.label :email
+                  = f.text_field :email,
+                    class: classnames(invalid: @user.errors[:email].present?),
+                    autofocus: true
+                  = f.label :email, class: :required
                   = error_message_for(@user, :email)
               div.row
                 .input-field.col.s12
                   = f.password_field :password, class: classnames(invalid: @user.errors[:password].present?)
-                  = f.label :password
+                  = f.label :password, class: :required
                   = error_message_for(@user, :password)
               div.row
                 .col.s6
