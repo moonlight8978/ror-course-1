@@ -65,4 +65,5 @@ RSpec.configure do |config|
   config.include FeatureHelpers, type: :feature
   config.include IntegrationHelpers, type: :request
   config.include ViewHelpers, type: :view
+  config.include CommonHelpers
 end

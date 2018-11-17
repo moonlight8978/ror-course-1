@@ -31,7 +31,7 @@ class Post < ApplicationRecord
       .detect { |image| !image.blob.content_type.start_with?('image/') }
       .nil?
 
-    images.purge_later
+    images.purge
     errors.add(:images, :format)
   end
 
@@ -45,7 +45,7 @@ class Post < ApplicationRecord
   def validate_images_count
     return if images.length < 5
 
-    images.purge_later
+    images.purge
     errors.add(:images, :too_many)
   end
 end
