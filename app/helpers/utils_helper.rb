@@ -22,6 +22,7 @@ module UtilsHelper
 
   def attachment_caption(attachment)
     blob = attachment.blob
-    "#{blob.filename} (Uploaded on: #{blob.created_at})"
+    blob.filename.to_s +
+      " (#{t('helpers.activestorage.blob.uploaded_at', at: blob.created_at)})"
   end
 end

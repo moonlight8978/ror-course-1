@@ -15,7 +15,7 @@ RSpec.feature 'User register new account', type: :feature do
         end
 
         expect(page.current_path).to eq(sign_up_path)
-        expect(page).to have_css('.helper-text[data-error="Email is required"]')
+        expect(page.body).to match(/Email is required/)
       end
     end
 

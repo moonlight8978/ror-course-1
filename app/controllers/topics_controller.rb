@@ -16,9 +16,9 @@ class TopicsController < ApplicationController
 
   def create
     @category = Category.find(params[:category_id])
-    @topic = @category.topics.create(topic_params)
+    @topic = @category.topics.build(topic_params)
     authorize @topic
-    if @topic.errors.empty?
+    if @topic.save
       redirect_to @topic
     else
       render :new

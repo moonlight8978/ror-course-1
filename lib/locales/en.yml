@@ -90,6 +90,9 @@ en:
     authorization:
       authentication:
         tooltip: Login required
+    activestorage:
+      blob:
+        uploaded_at: 'Uploaded at: %{at}'
   activerecord:
     models:
       user: User
@@ -130,7 +133,7 @@ en:
         post:
           attributes:
             content:
-              blank: Topic name is required
+              blank: Topic content is required
               too_long: Topic content must be less than 200 characters
             images:
               too_many: You cannot upload more than 5 files
