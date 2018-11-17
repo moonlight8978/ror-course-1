@@ -20,4 +20,5 @@
 
 $(document).ready(() => {
   M.AutoInit()
+  $('.input-with-counter').characterCounter()
 })

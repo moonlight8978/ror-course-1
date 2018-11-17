@@ -1,0 +1,58 @@
+= breadcrumbs_for \
+  Hash[path: root_path, title: t('views.breadcrumbs.categories')],
+  Hash[path: category_path(@category), title: @category.name],
+  Hash[title: t('views.breadcrumbs.topics.new')]
+
+= content_for :title do
+  = t('views.topics.new.title')
+
+.new-topic-screen
+  = form_with model: @topic, url: category_topics_path(@category),
+    method: :post, local: true do |f|
+
+    .row
+      .input-field.col.s12
+        = t('views.topics.new.post_to_html', category: @category.name)
+    .card
+      .card-content
+        .row
+          .input-field.col.s12
+            = f.text_field :name, autofocus: true,
+              placeholder: t('views.topics.new.placeholder.name'),
+              class: classnames(invalid: @topic.errors[:name].present?)
+            = f.label :name, class: 'required'
+            = error_message_for(@topic, :name)
+
+        = f.fields_for :first_post do |post_f|
+          .row
+            .input-field.col.s12
+              = post_f.text_area :content,
+                class: classnames('materialize-textarea input-with-counter', invalid: @topic.errors[:'first_post.content'].present?),
+                placeholder: t('views.topics.new.placeholder.content'),
+                data: { length: Post::CONTENT_MAXIMUM_LENGTH }
+              = post_f.label :content, class: 'required'
+              = error_message_for(@topic, :'first_post.content')
+
+            .file-field.input-field.col.s12
+              .btn
+                span = t('views.topics.new.attach')
+                = post_f.file_field :images, multiple: true
+              .file-path-wrapper
+                = text_field_tag :path, nil,
+                  placeholder: t('views.topics.new.placeholder.images'),
+                  class: classnames('file-path', invalid: @topic.errors[:'first_post.images'].present?)
+                = error_message_for(@topic, :'first_post.images')
+
+        .right-align
+          = link_to category_path(@category),
+            class: 'btn waves-light waves-effect red mr' do
+            i.material-icons.left not_interested
+            = t('views.topics.new.cancel')
+
+          = f.button nil, type: :submit, class: 'btn waves-light waves-effect' do
+            i.material-icons.left send
+            = t('views.topics.new.submit')
+
+
+
+

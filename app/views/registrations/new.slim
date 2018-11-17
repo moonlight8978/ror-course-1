@@ -19,28 +19,29 @@
                   .row
                     .input-field.col.s12
                       = f.text_field :username,
-                        class: classnames(invalid: @user.errors[:username].present?)
-                      = f.label :username
+                        class: classnames(invalid: @user.errors[:username].present?),
+                        autofocus: true
+                      = f.label :username, class: :required
                       = error_message_for(@user, :username)
 
                   .row
                     .input-field.col.s12
                       = f.text_field :email,
                         class: classnames(invalid: @user.errors[:email].present?)
-                      = f.label :email
+                      = f.label :email, class: :required
                       = error_message_for(@user, :email)
 
                   .row
                     .input-field.col.s6
                       = f.password_field :password,
                         class: classnames(invalid: @user.errors[:password].present?)
-                      = f.label :password
+                      = f.label :password, class: :required
                       = error_message_for(@user, :password)
 
                     .input-field.col.s6
                       = f.password_field :password_confirmation,
                         class: classnames(invalid: @user.errors[:password_confirmation].present?)
-                      = f.label :password_confirmation
+                      = f.label :password_confirmation, class: :required
                       = error_message_for(@user, :password_confirmation)
 
                   .row
