@@ -133,5 +133,6 @@ en:
               blank: Topic name is required
               too_long: Topic content must be less than 200 characters
             images:
+              too_many: You cannot upload more than 5 files
               size: Image's size must be less than 1MB
               format: Image's format is not valid (must be png|jpg|jpeg|gif|...)

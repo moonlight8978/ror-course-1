@@ -27,7 +27,17 @@
 
         .col.s10
           .post-content-wrapper
-            p.paragraph-content.post-content = post.content
+            .post-content
+              p.paragraph-content = post.content
+
+              - if post.images.any?
+                .post-images-container
+                  .post-image-list
+                    - post.images.map do |image|
+                      .post-image-item
+                        .truncate.post-image-caption = image.blob.filename
+                        = image_tag image, class: 'image materialboxed',
+                          data: { caption: attachment_caption(image) }
 
             .voting-containers
               .score

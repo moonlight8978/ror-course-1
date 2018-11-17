@@ -16,7 +16,7 @@
     .col.s9 = paginate @posts
 
   .card.post-list-container.row-list
-    = render 'topics/post', post: @topic.first_post
+    = render 'topics/post', post: @first_post
 
     = render partial: 'topics/post', collection: @posts, as: :post,
       locals: { start_index: start_index_of(@posts) }

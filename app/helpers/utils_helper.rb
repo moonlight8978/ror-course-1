@@ -19,4 +19,9 @@ module UtilsHelper
   def breadcrumbs_for(*links)
     render 'layouts/breadcrumbs', links: links
   end
+
+  def attachment_caption(attachment)
+    blob = attachment.blob
+    "#{blob.filename} (Uploaded on: #{blob.created_at})"
+  end
 end

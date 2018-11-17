@@ -18,6 +18,7 @@ class Post < ApplicationRecord
     length: { maximum: CONTENT_MAXIMUM_LENGTH }
   validate :validate_images_format, if: -> { images.attached? }
   validate :validate_images_size, if: -> { images.attached? }
+  validate :validate_images_count, if: -> { images.attached? }
 
   def first_post?
     topic.nil?
@@ -39,5 +40,12 @@ class Post < ApplicationRecord
 
     images.purge_later
     errors.add(:images, :size)
+  end
+
+  def validate_images_count
+    return if images.length < 5
+
+    images.purge_later
+    errors.add(:images, :too_many)
   end
 end

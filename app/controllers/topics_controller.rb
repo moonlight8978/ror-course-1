@@ -2,7 +2,9 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     authorize @topic
-    @posts = @topic.posts.includes(:creator, :category).page(params[:page])
+    @first_post = Post.with_attached_images.find(@topic.first_post.id)
+    @posts = @topic.posts.with_attached_images.includes(:creator, :category)
+      .page(params[:page])
   end
 
   def new
