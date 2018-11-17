@@ -30,17 +30,6 @@ module ClVoz
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    # Mailer
-    ActionMailer::Base.smtp_settings = {
-      address: 'smtp.gmail.com',
-      domain: 'mail.google.com',
-      port: 587,
-      user_name: ENV['GMAIL_ACCOUNT'],
-      password: ENV['GMAIL_PASSWORD'],
-      authentication: :plain
-      # enable_starttls_auto: true
-    }
-
     # Autoload paths
     config.autoload_paths << Rails.root.join('lib')
     config.assets.paths << Rails.root.join('node_modules')
