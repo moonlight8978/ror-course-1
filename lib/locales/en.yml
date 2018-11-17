@@ -56,6 +56,19 @@ en:
             message: Topic has been deleted
             posts_count: '-'
             votes_count: '-'
+    topics:
+      show:
+        new_post: Reply
+        posts:
+          original_post: Original post
+          vote:
+            zero: No votes
+            one: 1 vote
+            other: '%{count} votes'
+          upvote: Upvote
+          downvote: Downvote
+          deleted:
+            message: Post has been deleted
   helpers:
     label:
       user:
@@ -71,6 +84,10 @@ en:
       user:
         email: Email
         password: Password
+        roles:
+          user: Member
+          moderator: Moderator
+          admin: Administrator
       topic:
         statuses:
           opening: Opening

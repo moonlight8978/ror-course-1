@@ -8,9 +8,9 @@ RSpec.feature 'User visit category page', type: :feature do
   let!(:topics) { create_list(:topic, 13, category: category) }
 
   context 'when user is banned' do
-    let!(:ban) { create(:category_banning, user: user, category: category) }
+    let(:banned_user) { create(:user, banned_from: category) }
 
-    before { sign_in_as(user.email) }
+    before { sign_in_as(banned_user.email) }
 
     scenario 'user is restricted to the category' do
       visit category_path(category)
@@ -69,12 +69,9 @@ RSpec.feature 'User visit category page', type: :feature do
   end
 
   context 'when manager visits' do
-    let(:manager) { create(:user, :moderator) }
+    let(:manager) { create(:user, :moderator, manage: category) }
 
-    before do
-      create(:category_management, category: category, manager: manager)
-      sign_in_as(manager.email)
-    end
+    before { sign_in_as(manager.email) }
 
     scenario 'manager can see the content of deleted topic with badge' do
       visit category_path(category)

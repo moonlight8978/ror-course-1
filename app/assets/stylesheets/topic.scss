@@ -1,0 +1,119 @@
+@import 'utils/all';
+.topic-screen {
+  .topic-header,
+  .topic-footer {
+    margin-bottom: 1rem;
+
+    .pagination {
+      float: right;
+    }
+  }
+
+  .post-list-item {
+    position: relative;
+
+    .post-context {
+      margin: -1rem -1.5rem 1rem;
+      padding: 1rem 0;
+      background-color: #f5f5f5;
+
+      .badge {
+        float: none;
+        margin-right: 1rem;
+        margin-left: 0;
+      }
+
+      .post-counter {
+        text-transform: lowercase;
+      }
+    }
+
+    .post-body {
+      display: flex;
+
+      > .col {
+        float: none;
+      }
+    }
+
+    .post-creator-container {
+      .post-creator-avatar {
+        width: 60px;
+      }
+
+      .post-creator-info {
+        width: 75%;
+      }
+
+      .post-creator-role {
+        font-size: 0.9em;
+        color: $text-muted;
+      }
+    }
+
+    .post-content-wrapper {
+      position: relative;
+      height: 100%;
+
+      .post-content {
+        margin-bottom: 1.75rem;
+      }
+
+      .voting-containers {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        > * {
+          min-width: 80px;
+          font-size: 0.9em;
+          color: $text-muted;
+
+          cursor: pointer;
+        }
+
+        .vote {
+          display: flex;
+          align-items: center;
+          min-width: 100px;
+          transition: color 0.15s ease;
+
+          &.active {
+            &.upvote {
+              color: $text-success;
+            }
+
+            &.downvote {
+              color: $text-danger;
+            }
+          }
+
+          svg {
+            font-size: 1.5em;
+          }
+
+          .vote-desc {
+            padding-left: 0.75rem;
+          }
+        }
+      }
+    }
+
+    .post-divider {
+      position: absolute;
+      left: -1rem;
+      right: -1rem;
+      bottom: -1rem;
+      height: 1px;
+      background-color: $background-highlight;
+    }
+
+    &:last-child {
+      .post-divider {
+        display: none;
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
   nav.breadcrumbs
     .bs-container
       .nav-wrapper
-        .col.s12
+        .col.s12.truncate
           - links.map do |link|
             - if link[:path]
               a.breadcrumb href=link[:path] alt=link[:title] = link[:title]

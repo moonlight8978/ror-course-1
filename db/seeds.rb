@@ -68,6 +68,12 @@ seed :users do
     role: :moderator
   )
 
+  users << User.new(
+    email: 'user@framgia.com',
+    password: '1111',
+    username: 'super super admin'
+  )
+
   10.times do
     users << User.new(
       email: "#{SecureRandom.hex(10)}_#{Faker::Internet.email}",
@@ -144,7 +150,7 @@ seed :topics do
 
       first_post = category.posts.build(
         creator: creator,
-        content: Faker::Lorem.paragraph(3, true)
+        content: Faker::Lorem.paragraph(3, true, 30)
       )
 
       topic = category.topics.build(
@@ -172,7 +178,7 @@ seed :posts do
       posts << topic.posts.build(
         category: topic.category,
         creator: users.sample,
-        content: Faker::Lorem.paragraph(2, true)
+        content: Faker::Lorem.paragraph(3, true, 30)
       )
     end
   end

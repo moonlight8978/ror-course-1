@@ -7,7 +7,8 @@
   },
   "globals": {
     "ActionCable": true,
-    "App": true
+    "App": true,
+    "M": true
   },
   "rules": {
     "consistent-return": "off",

@@ -11,9 +11,8 @@ class Post < ApplicationRecord
   has_many :voters, through: :votings
 
   validates :content, presence: true
-  validates :topic, presence: { if: :first_post? }, on: :create
 
   def first_post?
-    Topic.exists?(first_post: self)
+    topic.nil?
   end
 end
