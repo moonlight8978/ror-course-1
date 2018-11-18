@@ -1,0 +1,13 @@
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/webapp
+ExecStart=/home/ubuntu/.rbenv/shims/bundle exec puma -C ./config/puma.rb
+PIDFile=/home/ubuntu/webapp/tmp/pids/puma.pid
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
