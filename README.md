@@ -20,6 +20,12 @@ $ docker-compose -v
 # docker-compose version 1.22.0, build f46880fe
 ```
 
+### before(:all)
+
+```bash
+$ cp Makefile.development Makefile
+```
+
 ### Help
 
 ```bash

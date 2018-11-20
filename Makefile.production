@@ -1,0 +1,35 @@
+.PHONY: sleep fetch restart compile-assets compile-assets migrate-database deploy init-nginx init-puma init
+
+.DEFAULT_GOAL := deploy
+
+sleep:
+	@sleep 5
+
+fetch: sleep
+	git reset --hard
+	git pull origin master
+
+restart:
+	sudo systemctl restart puma
+
+status:
+	sudo systemctl status puma
+
+compile-assets: sleep
+	bundle exec rake assets:precompile
+
+migrate-database: sleep
+	bundle exec rake db:migrate
+
+deploy:	fetch migrate-database compile-assets sleep restart
+
+init-nginx: sleep
+	sudo cp deploy/clvoz.conf /etc/nginx/sites-available/clvoz.conf
+	sudo ln -s /etc/nginx/sites-available/clvoz.conf /etc/nginx/sites-enabled/clvoz
+	sudo nginx -s reload
+
+init-puma: sleep
+	sudo cp deploy/puma.service /etc/systemd/system/puma.service
+	sudo systemctl enable puma
+
+init: init-nginx init-puma
