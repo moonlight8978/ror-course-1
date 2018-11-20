@@ -3,10 +3,7 @@ threads threads_count, threads_count
 
 preload_app!
 
-app_dir = File.expand_path('../..', __FILE__)
-
-# Run on unix socket only
-# port ENV.fetch('PORT') { 3000 }
+app_dir = File.expand_path('..', __dir__)
 
 environment ENV.fetch('RAILS_ENV') { 'development' }
 
@@ -18,6 +15,11 @@ stdout_redirect "#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.lo
 activate_control_app
 
 on_worker_boot do
-  ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
+  require 'activerecord'
+  begin
+    ActiveRecord::Base.connection.disconnect!
+  rescue StandardError
+    ActiveRecord::ConnectionNotEstablished
+  end
   ActiveRecord::Base.establish_connection
 end
