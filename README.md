@@ -5,9 +5,7 @@
 
 - For research purpose
 
-- Production: [here](http://ec2-13-229-208-57.ap-southeast-1.compute.amazonaws.com/)
-  - Server: AWS EC2
-  - Storage: AWS S3
+- Production: [link](http://ec2-18-136-194-38.ap-southeast-1.compute.amazonaws.com/)
 
 ### Development environment
 
@@ -20,6 +18,12 @@ $ docker -v
 # Docker version 18.06.1-ce, build e68fc7a
 $ docker-compose -v
 # docker-compose version 1.22.0, build f46880fe
+```
+
+### before(:all)
+
+```bash
+$ cp Makefile.development Makefile
 ```
 
 ### Help
