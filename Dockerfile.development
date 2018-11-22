@@ -1,4 +1,4 @@
-FROM ruby:latest as dev
+FROM ruby:latest
 
 ARG APP_PATH
 

@@ -3,9 +3,10 @@ services:
   server:
     build:
       context: .
-      target: dev
       args:
         APP_PATH: $APP_PATH
+    env_file:
+      - .env
     ports:
       - ${HOST_PORT}:3000
     command: rails s
@@ -16,6 +17,7 @@ services:
       - .:$APP_PATH
     depends_on:
       - db
+
   db:
     image: postgres:latest
     volumes:
@@ -23,6 +25,7 @@ services:
     restart: unless-stopped
     ports:
       - ${HOST_DB_PORT}:5432
+
   pgadmin:
     image: dpage/pgadmin4:latest
     volumes:

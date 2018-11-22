@@ -1,0 +1,35 @@
+FROM ruby:2.5.3-alpine as base
+
+RUN apk --update add nodejs build-base tzdata postgresql-dev imagemagick
+
+ENV RAILS_ENV=production RACK_ENV=production RAILS_ROOT=/var/www/clvoz
+RUN mkdir -p $RAILS_ROOT
+WORKDIR $RAILS_ROOT
+
+COPY Gemfile* ./
+RUN bundle install --without development test
+
+COPY . .
+
+FROM base as builder
+
+RUN apk --update add yarn
+
+RUN rake assets:precompile
+
+FROM base as appserver
+
+COPY --from=builder /var/www/clvoz/public/assets/* ./public/assets/
+
+EXPOSE 3000
+
+FROM nginx:1.15.6-alpine as webserver
+
+ENV RAILS_ROOT /var/www/clvoz
+RUN mkdir -p $RAILS_ROOT
+WORKDIR $RAILS_ROOT
+
+COPY deploy/clvoz.docker.conf /etc/nginx/conf.d
+COPY --from=builder /var/www/clvoz/public ./public/
+
+EXPOSE 80

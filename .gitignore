@@ -34,4 +34,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Environment specific files
 Makefile
+Dockerfile
+docker-compose.yml
+.env
+.env.production
