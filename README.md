@@ -23,6 +23,9 @@ $ docker-compose -v
 ### before(:all)
 
 ```bash
+$ cp .env.development .env
+$ cp Dockerfile.development Dockerfile
+$ cp docker-compose.development.yml docker-compose.yml
 $ cp Makefile.development Makefile
 ```
 
