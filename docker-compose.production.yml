@@ -4,6 +4,8 @@ services:
     build:
       context: .
       target: webserver
+      args:
+        RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
     env_file:
       - .env
     restart: always
@@ -20,6 +22,8 @@ services:
     build:
       context: .
       target: appserver
+      args:
+        RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
     env_file:
       - .env
     restart: always
