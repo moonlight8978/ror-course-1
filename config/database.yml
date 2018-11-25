@@ -10,9 +10,11 @@ default: &default
 development:
   <<: *default
   database: clVoz_development
+
 test:
-  <<: *default
-  database: clVoz_test
+  adapter: postgresql
+  database: clvoz_test
+
 production:
   <<: *default
   database: clVoz_production

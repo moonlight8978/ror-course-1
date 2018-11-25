@@ -25,7 +25,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/credentials.yml.enc
 
 # Personal Settings
 /.gems
@@ -40,5 +39,4 @@ Makefile
 Dockerfile
 docker-compose.yml
 .env
-.env.production
 config/puma.rb

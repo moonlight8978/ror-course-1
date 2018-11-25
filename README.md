@@ -23,11 +23,8 @@ $ docker-compose -v
 ### before(:all)
 
 ```bash
-$ cp .env.development .env
-$ cp config/puma.development.rb config/puma.rb
-$ cp Dockerfile.development Dockerfile
-$ cp docker-compose.development.yml docker-compose.yml
 $ cp Makefile.development Makefile
+$ make prepare
 ```
 
 ### Help

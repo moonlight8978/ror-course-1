@@ -6,6 +6,7 @@ sleep:
 	@sleep 2
 
 prepare:
+	cp .env.production .env
 	cp Dockerfile.production Dockerfile
 	cp docker-compose.production.yml docker-compose.yml
 
