@@ -19,6 +19,7 @@ RUN rake assets:precompile
 
 FROM base as appserver
 
+COPY config/puma.docker.production.rb copy/puma.rb
 COPY --from=builder /var/www/clvoz/public/assets/* ./public/assets/
 
 EXPOSE 3000

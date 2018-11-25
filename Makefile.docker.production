@@ -1,9 +1,13 @@
-.PHONY: sleep pull build createdb migratedb resetdb up down deploy init reset
+.PHONY: sleep prepare pull build createdb migratedb resetdb up down deploy init reset
 
 .DEFAULT_GOAL := deploy
 
 sleep:
 	@sleep 2
+
+prepare:
+	cp Dockerfile.production Dockerfile
+	cp docker-compose.production.yml docker-compose.yml
 
 pull:
 	git reset --hard
@@ -34,8 +38,8 @@ down:
 	docker-compose down
 	$(MAKE) sleep
 
-deploy: pull build migratedb up
+deploy: pull prepare build migratedb up
 
-init: pull build createdb up
+init: pull prepare build createdb up
 
 reset: down resetdb up
