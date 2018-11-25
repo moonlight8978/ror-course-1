@@ -1,18 +1,20 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= Rails.application.credentials.DATABASE_HOST %>
-  port: <%= Rails.application.credentials.DATABASE_PORT %>
-  username: <%= Rails.application.credentials.DATABASE_USERNAME %>
-  password: <%= Rails.application.credentials.DATABASE_PASSWORD %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  host: <%= ENV.fetch('DATABASE_HOST') %>
+  port: <%= ENV.fetch('DATABASE_PORT') %>
+  username: <%= ENV.fetch('DATABASE_USERNAME') %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD') %>
 
 development:
   <<: *default
   database: clVoz_development
+
 test:
-  <<: *default
-  database: clVoz_test
+  adapter: postgresql
+  database: clvoz_test
+
 production:
   <<: *default
   database: clVoz_production

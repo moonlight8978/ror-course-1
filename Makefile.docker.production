@@ -1,0 +1,46 @@
+.PHONY: sleep prepare pull build createdb migratedb resetdb up down deploy init reset
+
+.DEFAULT_GOAL := deploy
+
+sleep:
+	@sleep 2
+
+prepare:
+	cp .env.production .env
+	cp Dockerfile.production Dockerfile
+	cp docker-compose.production.yml docker-compose.yml
+
+pull:
+	git reset --hard
+	git pull origin master
+	$(MAKE) sleep
+
+build:
+	docker-compose build
+	$(MAKE) sleep
+
+createdb:
+	docker-compose run --rm server-production rake db:create db:schema:load db:seed data:score data:counter
+	$(MAKE) sleep
+
+migratedb:
+	docker-compose run --rm server-production rake db:migrate
+	$(MAKE) sleep
+
+resetdb:
+	docker-compose run -e DISABLE_DATABASE_ENVIRONMENT_CHECK=1 --rm server-production rake db:reset data:score data:counter
+	$(MAKE) sleep
+
+up:
+	docker-compose up -d
+	$(MAKE) sleep
+
+down:
+	docker-compose down
+	$(MAKE) sleep
+
+deploy: pull prepare build migratedb up
+
+init: pull prepare build createdb up
+
+reset: down resetdb up

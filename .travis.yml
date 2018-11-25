@@ -26,14 +26,14 @@ before_install:
   - node --version
 
 install:
-  - bundle install --jobs=3 --retry=3
+  - bundle install --without development production --jobs=3 --retry=3
   - yarn
 
 before_script:
   - psql -c 'create database clvoz_test;' -U postgres
   - cp config/database.travis.yml config/database.yml
   - cp config/credentials.travis.yml.enc config/credentials.yml.enc
-  - rake db:schema:load RAILS_ENV=test
+  - rake db:schema:load
 
 script:
   - yarn eslint

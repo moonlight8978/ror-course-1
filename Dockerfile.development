@@ -1,0 +1,15 @@
+FROM ruby:2.5.3-alpine
+
+ARG APP_PATH
+
+RUN apk --update add nodejs yarn build-base tzdata postgresql-dev imagemagick vim
+
+RUN mkdir $APP_PATH
+WORKDIR $APP_PATH
+
+COPY Gemfile* ./
+RUN bundle install --without=production
+
+COPY . .
+
+EXPOSE 3000

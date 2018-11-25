@@ -24,6 +24,7 @@ $ docker-compose -v
 
 ```bash
 $ cp Makefile.development Makefile
+$ make prepare
 ```
 
 ### Help

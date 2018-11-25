@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  nginx-production:
+    build:
+      context: .
+      target: webserver
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    command: ['nginx', '-g', 'daemon off;']
+    volumes:
+      - /data/clvoz/nginx/log:/var/log/nginx
+    depends_on:
+      - server-production
+
+  server-production:
+    build:
+      context: .
+      target: appserver
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - /data/clvoz/rails/log:${RAILS_ROOT}/log
+    command: puma -C config/puma.rb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:10.6-alpine
+    env_file:
+      - .env
+    volumes:
+      - /data/clvoz/postgresql/data:/var/lib/postgresql/data
+    restart: always

@@ -1,4 +1,4 @@
-.PHONY: help build start stop db-migrate db-reset generate console bash run spec fix lint ci
+.PHONY: help prepare build start stop db-migrate db-reset generate console bash run spec fix lint ci
 
 SERVER = server
 
@@ -10,6 +10,7 @@ help:
 	@echo ""
 	@echo "  Commands:"
 	@echo "    help (default):  Show usage"
+	@echo "    prepare:         Copy environment-specific files"
 	@echo "    build:           Build the app stack"
 	@echo "    start:           Run the app stack"
 	@echo "    stop:            Stop the app stack"
@@ -24,6 +25,12 @@ help:
 	@echo "    fix:             Fix rubocop conventions"
 	@echo "    lint:            Linting with stylelint and eslint"
 	@echo "    ci:              Run the check like CI"
+
+prepare:
+	cp .env.development .env
+	cp config/puma.development.rb config/puma.rb
+	cp Dockerfile.development Dockerfile
+	cp docker-compose.development.yml docker-compose.yml
 
 build:
 	@docker-compose build
