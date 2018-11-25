@@ -39,8 +39,8 @@ down:
 	docker-compose down
 	$(MAKE) sleep
 
-deploy: pull prepare build migratedb up
+deploy: pull build migratedb up
 
-init: pull prepare build createdb up
+init: pull build createdb up
 
 reset: down resetdb up
