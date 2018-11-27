@@ -1,2 +1,24 @@
 ja:
   welcome: ようこそ
+  views:
+    navbar:
+      home: CLvOZ
+      dashboard: Dashboard
+      dropdown:
+        sign_out: Sign out
+        settings: Settings
+      guest:
+        sign_in: Sign in
+        sign_up: Sign up
+    languages:
+      en: English
+      vi: Tiếng Việt
+      ja: 日本語
+    footer:
+      links: Links
+      team: Team 20cm
+      copyright: © 2018 Copyright Team 20cm
+    breadcrumbs:
+      categories: Home
+      topics:
+        new: Create new topic

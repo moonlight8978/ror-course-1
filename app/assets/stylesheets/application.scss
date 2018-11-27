@@ -16,12 +16,26 @@
  *= require_self
  */
 
+@import 'utils/all';
+
 #appContainer {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
 .navbar {
+  #languageSwitcher {
+    .dropdown-trigger {
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  #languageDropdown {
+    width: auto !important;
+  }
+
   .nav-avatar {
     width: 50px;
     margin-left: 1rem;

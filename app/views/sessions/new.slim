@@ -8,7 +8,8 @@
         .card
           .card-content
             .sign-in-logo
-              img.image src=asset_path('logo_framgia.jpg')
+              = link_to root_path do
+                img.image src=asset_path('logo_framgia.jpg')
             .row
               span.col.s12.card-title.center-align = t('views.sessions.new.header')
             = form_with model: @user, scope: :user, url: sign_in_path, local: true do |f|
@@ -26,8 +27,9 @@
                   = error_message_for(@user, :password)
               div.row
                 .col.s6
-                  = link_to t('views.sessions.new.create_account'), sign_up_path
+                  div = link_to t('views.sessions.new.create_account'), sign_up_path
                 .col.s6.right-align
                   = f.button t('views.sessions.new.sign_in'), class: 'btn waves-effect waves-light', type: :submit
 
+        = render 'common/languages'
 

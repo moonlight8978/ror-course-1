@@ -12,8 +12,8 @@ development:
   database: clVoz_development
 
 test:
-  adapter: postgresql
-  database: clvoz_test
+  <<: *default
+  database: clVoz_test
 
 production:
   <<: *default

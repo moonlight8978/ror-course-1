@@ -10,6 +10,10 @@ en:
       guest:
         sign_in: Sign in
         sign_up: Sign up
+    languages:
+      en: English
+      vi: Tiếng Việt
+      ja: 日本語
     footer:
       links: Links
       team: Team 20cm

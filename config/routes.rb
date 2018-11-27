@@ -22,4 +22,6 @@ Rails.application.routes.draw do
       resources :posts
     end
   end
+
+  get 'languages', to: 'languages#index'
 end
