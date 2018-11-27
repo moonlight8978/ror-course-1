@@ -13,13 +13,16 @@ COPY . .
 
 FROM base as builder
 
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
+
 RUN apk --update add yarn
 
 RUN rake assets:precompile
 
 FROM base as appserver
 
-COPY config/puma.docker.production.rb copy/puma.rb
+COPY config/puma.docker.production.rb config/puma.rb
 COPY --from=builder /var/www/clvoz/public/assets/* ./public/assets/
 
 EXPOSE 3000
