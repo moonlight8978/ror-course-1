@@ -1,0 +1,8 @@
+.row.languages-container
+  .col.s12
+    span.current-language
+      = t(I18n.locale, scope: 'views.languages')
+
+    - selectable_locales.each do |locale|
+      span.language-divider &middot;
+      = link_to t(locale, scope: 'views.languages'), languages_path(locale: locale)

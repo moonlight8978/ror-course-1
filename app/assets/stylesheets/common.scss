@@ -98,3 +98,13 @@ form {
     }
   }
 }
+
+.languages-container {
+  .current-language {
+    color: $text-muted;
+  }
+
+  .language-divider {
+    margin: 0.25rem;
+  }
+}

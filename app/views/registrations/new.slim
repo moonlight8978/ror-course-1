@@ -8,7 +8,8 @@
         .card
           .card-content
             .logo
-              img.image src=asset_path('logo_framgia.jpg')
+              = link_to root_path do
+                img.image src=asset_path('logo_framgia.jpg')
 
             .row
               span.col.s12.card-title = t('views.registrations.new.header')
@@ -54,4 +55,6 @@
 
                 .col.s4
                   img.image src=asset_path('account.svg')
+
+        = render 'common/languages'
 

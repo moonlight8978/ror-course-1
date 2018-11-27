@@ -39,9 +39,17 @@ class ApplicationController < ActionController::Base
   private
 
   def set_locale
+    extracted_locale = extract_locale.try(:to_sym)
     I18n.locale =
-      extract_locale_from_accept_language_header ||
-      I18n.default_locale
+      if I18n.available_locales.include?(extracted_locale)
+        extract_locale
+      else
+        I18n.default_locale
+      end
+  end
+
+  def extract_locale
+    session[:locale] || extract_locale_from_accept_language_header
   end
 
   def extract_locale_from_accept_language_header
