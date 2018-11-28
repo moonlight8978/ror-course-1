@@ -9,7 +9,7 @@
 .topic-screen
   .row.valign-wrapper.topic-header
     .col.s3
-      = button_if_signed_in '#!' do
+      = button_if_signed_in new_topic_post_path(@topic) do
         i.material-icons.left create
         = t('views.topics.show.new_post')
 
@@ -23,7 +23,7 @@
 
   .row.valign-wrapper.topic-footer
     .col.s3
-      = button_if_signed_in '#!' do
+      = button_if_signed_in new_topic_post_path(@topic) do
         i.material-icons.left create
         = t('views.topics.show.new_post')
 

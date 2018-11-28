@@ -15,3 +15,10 @@ RSpec.shared_examples 'request_require_authentication' do |request|
       .to raise_error(ApplicationController::Unauthenticated)
   end
 end
+
+RSpec.shared_examples 'request_forbidden' do |request|
+  scenario 'sees the 403 forbidden page' do
+    instance_eval(&request)
+    expect(response).to have_http_status(:forbidden)
+  end
+end

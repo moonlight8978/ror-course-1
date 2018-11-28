@@ -56,38 +56,18 @@ RSpec.describe 'Topics', type: :request do
       ]
     end
 
-    context 'when banned user send request' do
-      subject do
-        post category_topics_path(category), params: { topic: topic_params }
-      end
-
-      before { sign_in_as(banned_user.email) }
-
-      it 'returns the forbidden status' do
-        subject
-        expect(response).to have_http_status(:forbidden)
-      end
-
-      it 'does not make any changes' do
-        expect { subject }.not_to change { Topic.count }
-      end
+    subject do
+      post category_topics_path(category), params: { topic: topic_params }
     end
 
-    context 'when guest send request' do
-      subject do
-        post category_topics_path(category), params: { topic: topic_params }
-      end
+    it_behaves_like 'request_require_authentication', proc { subject }
 
-      it 'does not make any changes' do
-        expect { subject }.not_to change { Topic.count }
-      end
-    end
+    it_behaves_like 'request_forbidden', proc {
+      sign_in_as(banned_user.email)
+      subject
+    }
 
     context 'when non-banned user send request' do
-      subject do
-        post category_topics_path(category), params: { topic: topic_params }
-      end
-
       before { sign_in_as(user.email) }
 
       it 'create new topic' do

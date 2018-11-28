@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  CONTENT_MAXIMUM_LENGTH = 200
+  CONTENT_MAXIMUM_LENGTH = 500
 
   include SoftDeletable
 

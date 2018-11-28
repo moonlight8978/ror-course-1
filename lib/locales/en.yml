@@ -22,6 +22,8 @@ en:
       categories: Home
       topics:
         new: Create new topic
+      posts:
+        new: Reply
     sessions:
       new:
         title: Sign in
@@ -84,6 +86,16 @@ en:
           images: Attach one or more images
         attach: Attach image
         submit: Create topic
+        cancel: Back
+    posts:
+      new:
+        title: 'Reply %{topic}'
+        reply_to_html: '<span class="reply-to">Reply:</span> %{topic}'
+        placeholder:
+          content: Reply content
+          images: Attach one or more images
+        attach: Attach image
+        submit: Submit reply
         cancel: Back
 
   helpers:

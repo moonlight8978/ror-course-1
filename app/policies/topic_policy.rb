@@ -25,10 +25,9 @@ class TopicPolicy < ApplicationPolicy
   end
 
   def reply?
-    return false if guest?
-    return false unless user.can_interact_with_category?(record.category)
+    return false if guest? || record.deleted? || record.locked?
 
-    record.opening? && record.visible?
+    user.can_interact_with_category?(record.category)
   end
 
   private
