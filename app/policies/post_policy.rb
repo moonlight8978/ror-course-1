@@ -6,9 +6,21 @@ class PostPolicy < ApplicationPolicy
     not_user? || user.can_interact_with_category?(record.category)
   end
 
+  def create?
+    topic_policy.reply?
+  end
+
+  def new?
+    create?
+  end
+
   private
 
   def category_policy
     @category_policy ||= CategoryPolicy.new(user, record.category)
+  end
+
+  def topic_policy
+    @topic_policy ||= TopicPolicy.new(user, record.topic)
   end
 end
