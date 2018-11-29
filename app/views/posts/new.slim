@@ -8,37 +8,5 @@
   = t('views.posts.new.title', topic: @topic.name)
 
 .new-post-screen
-  = form_with model: @post, url: topic_posts_path(@topic), local: true, method: :post do |f|
-    .row
-      .input-field.col.s12
-        = t('views.posts.new.reply_to_html', topic: @topic.name)
-    .card
-      .card-content
-        .row
-          .input-field.col.s12
-            = f.text_area :content,
-              class: classnames('materialize-textarea input-with-counter', invalid: @post.errors[:content].present?),
-              placeholder: t('views.posts.new.placeholder.content'),
-              data: { length: Post::CONTENT_MAXIMUM_LENGTH }
-            = f.label :content, class: 'required'
-            = error_message_for(@post, :content)
-
-          .file-field.input-field.col.s12
-            .btn
-              span = t('views.posts.new.attach')
-              = f.file_field :images, multiple: true
-            .file-path-wrapper
-              = text_field_tag :path, nil,
-                placeholder: t('views.posts.new.placeholder.images'),
-                class: classnames('file-path', invalid: @post.errors[:images].present?)
-              = error_message_for(@post, :images)
-
-        .right-align
-          = link_to topic_path(@topic),
-            class: 'btn waves-light waves-effect red mr' do
-            i.material-icons.left not_interested
-            = t('views.posts.new.cancel')
-
-          = f.button nil, type: :submit, class: 'btn waves-light waves-effect' do
-            i.material-icons.left send
-            = t('views.posts.new.submit')
+  = form_with model: @post, url: topic_posts_path(@post.topic), local: true, method: :post, class: 'post-form' do |f|
+    = render 'posts/form', f: f, post: @post

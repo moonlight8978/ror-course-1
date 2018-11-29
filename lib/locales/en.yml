@@ -24,6 +24,7 @@ en:
         new: Create new topic
       posts:
         new: Reply
+        edit: Edit reply
     sessions:
       new:
         title: Sign in
@@ -90,6 +91,9 @@ en:
     posts:
       new:
         title: 'Reply %{topic}'
+      edit:
+        title: 'Edit reply %{topic}'
+      form:
         reply_to_html: '<span class="reply-to">Reply:</span> %{topic}'
         placeholder:
           content: Reply content
@@ -97,7 +101,6 @@ en:
         attach: Attach image
         submit: Submit reply
         cancel: Back
-
   helpers:
     label:
       user:

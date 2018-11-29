@@ -31,21 +31,18 @@ class Post < ApplicationRecord
       .detect { |image| !image.blob.content_type.start_with?('image/') }
       .nil?
 
-    images.purge_later
     errors.add(:images, :format)
   end
 
   def validate_images_size
     return if images.detect { |image| image.blob.byte_size > 1_000_000 }.nil?
 
-    images.purge_later
     errors.add(:images, :size)
   end
 
   def validate_images_count
     return if images.length < 5
 
-    images.purge_later
     errors.add(:images, :too_many)
   end
 end

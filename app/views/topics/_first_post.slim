@@ -9,7 +9,7 @@
 
         = post.created_at
       .col.s2.right-align.post-counter
-        | ##{start_index + post_counter}
+        = t('views.topics.show.posts.original_post')
     - if policy(post).show?
       .row.post-body
         .col.s2
@@ -47,12 +47,6 @@
                   i.fas.fa-caret-down
                   span.vote-desc
                     = t('views.topics.show.posts.downvote')
-
-              .actions-container
-                - if policy(post).edit?
-                  = link_to edit_post_path(post), class: 'edit' do
-                    i.fas.fa-pencil-alt
-                    | Edit
 
     - else
       div = t('views.topics.show.posts.deleted.message')

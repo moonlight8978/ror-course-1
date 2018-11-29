@@ -1,0 +1,12 @@
+= breadcrumbs_for \
+  Hash[path: root_path, title: t('views.breadcrumbs.categories')],
+  Hash[path: category_path(@post.category), title: @post.category.name],
+  Hash[path: topic_path(@post.topic), title: @post.topic.name],
+  Hash[title: t('views.breadcrumbs.posts.edit')]
+
+= content_for :title do
+  = t('views.posts.edit.title', topic: @post.topic.name)
+
+.edit-post-screen
+  = form_with model: @post, url: post_path(@post), local: true, method: :put, class: 'post-form' do |f|
+    = render 'posts/form', f: f, post: @post
