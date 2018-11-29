@@ -82,43 +82,63 @@
         }
       }
 
-      .voting-containers {
+      .post-utilities {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         position: absolute;
         bottom: 0;
         left: 0;
+        right: 0;
 
-        > * {
-          min-width: 80px;
-          font-size: 0.9em;
-          color: $text-muted;
-
-          cursor: pointer;
+        svg {
+          margin-right: 0.75rem;
         }
 
-        .vote {
+        .actions-container {
           display: flex;
-          align-items: center;
-          min-width: 100px;
-          transition: color 0.15s ease;
 
-          &.active {
-            &.upvote {
-              color: $text-success;
-            }
+          .edit {
+            font-size: 0.9em;
+            color: $text-muted;
+            transition: color 0.15s ease;
 
-            &.downvote {
-              color: $text-danger;
+            &:hover {
+              color: $text-sky;
             }
           }
+        }
 
-          svg {
-            font-size: 1.5em;
+        .voting-container {
+          display: flex;
+
+          > * {
+            min-width: 80px;
+            font-size: 0.9em;
+            color: $text-muted;
+
+            cursor: pointer;
           }
 
-          .vote-desc {
-            padding-left: 0.75rem;
+          .vote {
+            display: flex;
+            align-items: center;
+            min-width: 100px;
+            transition: color 0.15s ease;
+
+            &.active {
+              &.upvote {
+                color: $text-success;
+              }
+
+              &.downvote {
+                color: $text-danger;
+              }
+            }
+
+            svg {
+              font-size: 1.5em;
+            }
           }
         }
       }

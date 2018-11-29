@@ -14,6 +14,17 @@ class PostPolicy < ApplicationPolicy
     create?
   end
 
+  def update?
+    return false unless topic_policy.reply?
+    return false if record.deleted?
+
+    category_policy.manage? || user.posted?(record)
+  end
+
+  def edit?
+    update?
+  end
+
   private
 
   def category_policy
