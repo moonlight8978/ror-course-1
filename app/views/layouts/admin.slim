@@ -10,6 +10,10 @@ html lang=I18n.locale
     .row
       .col.s12
         #appContainer.bs-container
-          = yield
+          .row
+            .col.s3
+              = render 'layouts/sidenav'
+            .col.s9
+              = yield
 
     = render 'layouts/footer'

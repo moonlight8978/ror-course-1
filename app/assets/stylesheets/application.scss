@@ -18,6 +18,16 @@
 
 @import 'utils/all';
 
+html {
+  height: 100%;
+  background-color: $background;
+}
+
+body {
+  min-height: 100%;
+  background-color: $background;
+}
+
 #appContainer {
   padding-top: 1rem;
   padding-bottom: 1rem;

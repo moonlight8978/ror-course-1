@@ -1,4 +1,4 @@
-.PHONY: help prepare build start stop db-migrate db-reset generate console bash run spec fix lint ci
+.PHONY: help prepare build start stop db-migrate db-reset generate console bash run spec fix lint ci routes
 
 SERVER = server
 
@@ -55,7 +55,7 @@ db-reset:
 	@docker-compose up -d
 
 generate:
-	@sudo chmod 777 -R ./log/bullet.log
+	@sudo chmod 777 -R log tmp
 	@docker-compose run -u $$(id -u):$$(id -g) --rm ${SERVER} rails g $(filter-out $@,$(MAKECMDGOALS))
 
 console:
@@ -78,3 +78,6 @@ lint:
 	docker-compose run --rm ${SERVER} yarn stylelint
 
 ci: lint fix spec
+
+routes:
+	@docker-compose run --rm ${SERVER} rails routes

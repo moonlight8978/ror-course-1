@@ -5,7 +5,7 @@
 
 - For research purpose
 
-- Production: [link](http://ec2-18-136-194-38.ap-southeast-1.compute.amazonaws.com/)
+- Production: [link](http://moonlight8978.asia/)
 
 ### Development environment
 

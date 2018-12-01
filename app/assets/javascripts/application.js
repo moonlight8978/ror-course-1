@@ -16,6 +16,7 @@
 //= require popper.js/dist/umd/popper.min
 //= require @fortawesome/fontawesome-free/js/all.min
 //= require materialize-css/dist/js/materialize.min
+//= require chart.js/dist/Chart.min
 //= require_tree .
 
 $(document).ready(() => {

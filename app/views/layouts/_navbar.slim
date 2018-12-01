@@ -14,8 +14,9 @@
         - if signed_in?
           ul#userNavUtils.right.hide-on-med-and-down
             - if policy(:application).manage?
-              li
-                a href="#!" = t('views.navbar.dashboard')
+              li class=classnames(active: current_page?(admin_dashboards_path))
+                a href=admin_dashboards_path
+                  = t('views.navbar.dashboard')
             li.nav-avatar
               a href="#!"
                 img.image src=asset_path('default_avatar.png')
