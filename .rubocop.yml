@@ -20,6 +20,8 @@ Layout/MultilineMethodCallIndentation:
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/**/*'
+Metrics/AbcSize:
+  Enabled: false
 Metrics/BlockLength:
   Enabled: false
 Metrics/LineLength:

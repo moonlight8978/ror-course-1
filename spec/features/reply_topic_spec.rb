@@ -42,7 +42,14 @@ RSpec.feature 'Reply a topic', type: :feature do
         click_button 'Submit reply'
       end
 
-      expect(page.current_path).to match(%r{^/topics/\d+$})
+      expect(page).to have_content('this is a reply')
+
+      click_link category.name
+
+      expect(page).to have_css(
+        '.topic-list-item:first-child .last-post-content',
+        text: 'this is a reply'
+      )
     end
   end
 

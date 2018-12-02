@@ -33,7 +33,7 @@ RSpec.feature 'Create new topic', type: :feature do
 
     scenario 'user create topic successfully' do
       within 'form' do
-        fill_in 'Name', with: 'a topic name'
+        fill_in 'Name', with: 'topic name'
         fill_in 'Content', with: 'topic content'
         attach_file 'topic_first_post_attributes_images',
           get_attachment_path('favicon.ico')
@@ -41,8 +41,15 @@ RSpec.feature 'Create new topic', type: :feature do
       end
 
       expect(page).to have_current_path(topic_path(Topic.last))
-      expect(page).to have_content('a topic name')
+      expect(page).to have_content('topic name')
       expect(page).to have_content('topic content')
+
+      click_link category.name
+
+      expect(page).to have_css(
+        '.topic-list-item:first-child .topic-name',
+        text: 'topic name'
+      )
     end
   end
 end

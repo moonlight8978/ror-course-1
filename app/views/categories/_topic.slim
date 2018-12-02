@@ -30,7 +30,7 @@
       = topic.posts.size
     .col.s4
       - if topic.last_post.present?
-        .truncate
+        .truncate.last-post-content
           = topic.last_post.content
         .row.post-metadata
           .col.s8

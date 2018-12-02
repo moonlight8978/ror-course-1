@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.feature 'User visit category page', type: :feature do
   let(:user) { create(:user) }
   let!(:category) { create(:category) }
+  let!(:topics) { create_list(:topic, 13, category: category) }
   let!(:deleted_topic) { create(:topic, :deleted, category: category) }
   let!(:locked_topic) { create(:topic, :locked, category: category) }
-  let!(:topics) { create_list(:topic, 13, category: category) }
 
   context 'when user is banned' do
     let(:banned_user) { create(:user, banned_from: category) }
