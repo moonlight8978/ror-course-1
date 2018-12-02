@@ -6,6 +6,7 @@ class TopicsController < ApplicationController
     authorize @topic
     @first_post = Post.with_attached_images.find(@topic.first_post.id)
     @posts = @topic.posts.with_attached_images.includes(:creator, :category)
+      .order(created_at: :asc)
       .page(params[:page])
   end
 

@@ -7,7 +7,8 @@ class Category < ApplicationRecord
   has_many :managers, through: :category_managements
   has_many :banned_users, through: :category_bannings, source: :user
 
-  has_one :last_topic, -> { order(created_at: :desc) }, class_name: 'Topic'
+  has_one :last_topic, -> { visible.order(created_at: :desc) },
+    class_name: 'Topic'
 
   validates :name, presence: true, uniqueness: true
 end
