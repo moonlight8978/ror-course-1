@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require activestorage
+//= require rails-ujs
 //= require axios/dist/axios.min
 //= require jquery/dist/jquery.min
 //= require popper.js/dist/umd/popper.min

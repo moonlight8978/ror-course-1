@@ -85,6 +85,8 @@ en:
           downvote: Downvote
           deleted:
             message: Post has been deleted
+          edit: Edit
+          delete: Delete
       new:
         title: Create new topic
         post_to_html: '<span class="post-to">Post to:</span> %{category}'
