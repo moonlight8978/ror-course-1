@@ -1,0 +1,48 @@
+@import 'utils/all';
+
+.collection.card.admin-sidenav {
+  margin: 0;
+  border: 0;
+
+  .collection-header {
+    background-color: $background-highlight;
+
+    > * {
+      margin: 0;
+      padding: 0.5rem 0;
+    }
+  }
+
+  .collection-item.avatar {
+    border-left: 2px solid transparent;
+    min-height: 0;
+    padding: 10px 20px 10px 18px;
+    transition: all 0.15s ease;
+
+    .title {
+      color: $text-muted;
+      font-size: 1rem;
+    }
+
+    &.active {
+      background-color: $background-primary;
+      border-left-color: $border-active;
+
+      .title {
+        color: $text-primary;
+      }
+    }
+
+    &:not(.active):hover {
+      background-color: $background-highlight;
+    }
+
+    i,
+    svg {
+      color: $text-primary;
+      width: 30px;
+      text-align: left;
+      margin-right: 0.25em;
+    }
+  }
+}

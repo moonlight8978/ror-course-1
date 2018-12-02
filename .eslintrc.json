@@ -8,9 +8,11 @@
   "globals": {
     "ActionCable": true,
     "App": true,
-    "M": true
+    "M": true,
+    "Chart": true
   },
   "rules": {
+    "arrow-body-style": "off",
     "consistent-return": "off",
     "newline-before-return": "error",
     "no-confusing-arrow": "off",

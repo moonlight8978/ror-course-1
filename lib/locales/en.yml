@@ -1,5 +1,9 @@
 en:
   welcome: Welcome
+  date:
+    formats:
+      month_and_year: '%Y/%m'
+
   views:
     navbar:
       home: CLvOZ
@@ -25,6 +29,9 @@ en:
       posts:
         new: Reply
         edit: Edit reply
+      admin:
+        dashboards:
+          index: Dashboard
     sessions:
       new:
         title: Sign in
@@ -101,6 +108,23 @@ en:
         attach: Attach image
         submit: Submit reply
         cancel: Back
+    admin:
+      sidenav:
+        title: Quick navigation
+        dashboard: Dashboard
+        placeholder: Placeholder
+      dashboards:
+        index:
+          statistics:
+            title: Statistics this month
+            users: New users
+            topics: New topics
+            posts: New posts
+          chart:
+            label: Maximum online users (fake)
+            x_label: Month
+            y_label: Users
+
   helpers:
     label:
       user:

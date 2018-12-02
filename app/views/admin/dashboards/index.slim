@@ -1,0 +1,49 @@
+= breadcrumbs_for \
+  Hash[path: root_path, title: t('views.breadcrumbs.categories')],
+  Hash[title: t('views.breadcrumbs.admin.dashboards.index')]
+
+= content_for :title
+  = t('views.breadcrumbs.admin.dashboards.index')
+
+.dashboard-screen
+  .row
+    .col.s12
+      .row
+        .col.s12
+          h6.statistics-title
+            => t('views.admin.dashboards.index.statistics.title')
+            | (#{l(Date.current, format: :month_and_year)})
+
+        .col.s4
+          .card.statistics-item
+            .pink.lighten-2
+              i.fas.fa-user-plus
+            .desc
+              .title = t('views.admin.dashboards.index.statistics.users')
+              .count = @statistics.new_users_count
+
+        .col.s4
+          .card.statistics-item
+            .purple.lighten-2
+              i.fas.fa-pen
+            .desc
+              .title = t('views.admin.dashboards.index.statistics.topics')
+              .count = @statistics.new_topics_count
+
+        .col.s4
+          .card.statistics-item
+            .orange.lighten-2
+              i.fas.fa-reply
+            .desc
+              .title = t('views.admin.dashboards.index.statistics.posts')
+              .count = @statistics.new_posts_count
+
+    .col.s12
+      .card
+        .card-content
+          canvas#statisticsChart [
+            height="300"
+            data-x-label=t('views.admin.dashboards.index.chart.x_label')
+            data-y-label=t('views.admin.dashboards.index.chart.y_label')
+            data-label=t('views.admin.dashboards.index.chart.label')
+          ]

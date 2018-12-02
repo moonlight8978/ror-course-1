@@ -20,6 +20,8 @@ class Post < ApplicationRecord
   validate :validate_images_size, if: -> { images.attached? }
   validate :validate_images_count, if: -> { images.attached? }
 
+  scope :without_first_posts, -> { where.not(topic: nil) }
+
   def first_post?
     topic.nil?
   end

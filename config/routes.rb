@@ -18,10 +18,16 @@ Rails.application.routes.draw do
   resource :me, only: :show
 
   resources :categories, shallow: true, only: %i[index show] do
-    resources :topics do
-      resources :posts
+    resources :topics, except: :index do
+      resources :posts, except: :index
     end
   end
 
-  get 'languages', to: 'languages#index'
+  namespace :admin do
+    root to: 'dashboards#index'
+
+    resources :dashboards, only: :index
+  end
+
+  resources :languages, only: :index
 end
