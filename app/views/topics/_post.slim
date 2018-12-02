@@ -52,7 +52,12 @@
                 - if policy(post).edit?
                   = link_to edit_post_path(post), class: 'edit' do
                     i.fas.fa-pencil-alt
-                    | Edit
+                    = t('views.topics.show.posts.edit')
+
+                - if policy(post).destroy?
+                  = link_to post_path(post), class: 'delete', method: :delete do
+                    i.fas.fa-trash-alt
+                    = t('views.topics.show.posts.delete')
 
     - else
       div = t('views.topics.show.posts.deleted.message')

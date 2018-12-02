@@ -132,4 +132,85 @@ RSpec.describe 'Posts', type: :request do
       end
     end
   end
+
+  describe 'DELETE /posts/:id' do
+    subject { delete post_path(reply) }
+
+    context 'when topic is closed' do
+      let(:reply) { create(:post, topic: deleted_topic, creator: admin) }
+
+      before { sign_in_as(admin.email) }
+
+      it_behaves_like 'request_forbidden', proc { subject }
+
+      it 'does not destroy the post' do
+        expect { subject }.not_to change { reply.reload.deleted? }
+      end
+    end
+
+    context 'when topic is locked' do
+      let(:reply) { create(:post, topic: locked_topic, creator: admin) }
+
+      before { sign_in_as(admin.email) }
+
+      it_behaves_like 'request_forbidden', proc { subject }
+
+      it 'does not destroy the post' do
+        expect { subject }.not_to change { reply.reload.deleted? }
+      end
+    end
+
+    context 'when topic is opening' do
+      let(:reply) { create(:post, topic: topic, creator: user) }
+
+      context 'when the post is already deleted' do
+        before { reply.soft_destroy }
+
+        it_behaves_like 'request_forbidden', proc {
+          sign_in_as(user.email)
+          subject
+        }
+
+        it_behaves_like 'request_forbidden', proc {
+          sign_in_as(manager.email)
+          subject
+        }
+
+        it_behaves_like 'request_forbidden', proc {
+          sign_in_as(admin.email)
+          subject
+        }
+      end
+
+      context 'when the post is visible' do
+        it_behaves_like 'request_require_authentication', proc { subject }
+
+        it_behaves_like 'request_forbidden', proc {
+          reply.update(creator: banned_user)
+          sign_in_as(banned_user.email)
+          subject
+        }
+
+        it 'cannot be deleted by moderator' do
+          sign_in_as(moderator.email)
+          expect { subject }.not_to change { reply.reload.deleted? }
+        end
+
+        it 'can be deleted by creator' do
+          sign_in_as(user.email)
+          expect { subject }.to change { reply.reload.deleted? }.to(true)
+        end
+
+        it 'can be deleted by manager' do
+          sign_in_as(manager.email)
+          expect { subject }.to change { reply.reload.deleted? }.to(true)
+        end
+
+        it 'can be deleted by admin' do
+          sign_in_as(admin.email)
+          expect { subject }.to change { reply.reload.deleted? }.to(true)
+        end
+      end
+    end
+  end
 end
