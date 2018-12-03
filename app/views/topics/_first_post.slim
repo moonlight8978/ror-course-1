@@ -48,6 +48,12 @@
                   span.vote-desc
                     = t('views.topics.show.posts.downvote')
 
+              .actions-container
+                - if policy(topic).edit?
+                  = link_to edit_topic_path(topic), class: 'edit' do
+                    i.fas.fa-pencil-alt
+                    = t('views.topics.show.edit')
+
     - else
       div = t('views.topics.show.posts.deleted.message')
 

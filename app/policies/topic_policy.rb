@@ -15,9 +15,13 @@ class TopicPolicy < ApplicationPolicy
   end
 
   def update?
-    return false if guest? || !user.can_interact_with_category?(record.category)
+    return false unless reply?
 
-    user.posted?(record) || category_policy.manage?
+    category_policy.manage? || user.posted?(record)
+  end
+
+  def edit?
+    update?
   end
 
   def destroy?
