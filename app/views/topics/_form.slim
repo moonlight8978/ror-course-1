@@ -1,0 +1,36 @@
+.row
+  .input-field.col.s12
+    = t('views.topics.form.post_to_html', category: topic.category.name)
+.card
+  .card-content
+    = yield if block_given?
+
+    = f.fields_for :first_post do |post_f|
+      .row
+        .input-field.col.s12
+          = post_f.text_area :content,
+            class: classnames('materialize-textarea input-with-counter', invalid: topic.errors[:'first_post.content'].present?),
+            placeholder: t('views.topics.form.placeholder.content'),
+            data: { length: Post::CONTENT_MAXIMUM_LENGTH }
+          = post_f.label :content, class: 'required'
+          = error_message_for(topic, :'first_post.content')
+
+        .file-field.input-field.col.s12
+          .btn
+            span = t('views.topics.form.attach')
+            = post_f.file_field :images, multiple: true
+          .file-path-wrapper
+            = text_field_tag :path, nil,
+              placeholder: t('views.topics.form.placeholder.images'),
+              class: classnames('file-path', invalid: topic.errors[:'first_post.images'].present?)
+            = error_message_for(topic, :'first_post.images')
+
+    .right-align
+      = link_to category_path(topic.category),
+        class: 'btn waves-light waves-effect red mr' do
+        i.material-icons.left not_interested
+        = t('views.topics.form.cancel')
+
+      = f.button nil, type: :submit, class: 'btn waves-light waves-effect' do
+        i.material-icons.left send
+        = submit_text

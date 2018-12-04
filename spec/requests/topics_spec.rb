@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Topics', type: :request do
   let(:category) { create(:category) }
-  let(:topic) { create(:topic, category: category) }
+  let(:topic) { create(:topic, category: category, creator: user) }
   let(:user) { create(:user) }
+  let(:visitor) { create(:user) }
   let(:banned_user) { create(:user, banned_from: category) }
   let(:moderator) { create(:user, :moderator) }
+  let(:manager) { create(:user, :moderator, manage: category) }
   let(:admin) { create(:user, :admin) }
   let!(:visible_post) { create(:post, topic: topic) }
   let!(:deleted_post) { create(:post, :deleted, topic: topic) }
@@ -77,6 +79,122 @@ RSpec.describe 'Topics', type: :request do
       it 'redirect the user to new topic' do
         subject
         expect(response).to redirect_to(topic_path(Topic.last))
+      end
+    end
+  end
+
+  describe 'PUT /topics/:id' do
+    let(:topic_params) do
+      Hash[
+        name: 'new name',
+        first_post_attributes: {
+          content: 'new content',
+          id: topic.first_post.id
+        }
+      ]
+    end
+
+    subject { put topic_path(topic), params: { topic: topic_params } }
+
+    context 'when topic is locked' do
+      let(:locked_topic) do
+        create(:topic, :locked, category: category, creator: user)
+      end
+      let(:topic) { locked_topic }
+
+      before { sign_in_as(admin.email) }
+
+      it_behaves_like 'request_forbidden', proc { subject }
+
+      it 'does not change the topic' do
+        expect { subject }.not_to change { topic.first_post.reload.content }
+      end
+    end
+
+    context 'when topic is deleted' do
+      let(:deleted_topic) do
+        create(:topic, :deleted, category: category, creator: user)
+      end
+      let(:topic) { deleted_topic }
+
+      before { sign_in_as(admin.email) }
+
+      it_behaves_like 'request_forbidden', proc { subject }
+
+      it 'does not change the topic' do
+        expect { subject }.not_to change { topic.first_post.reload.content }
+      end
+    end
+
+    context 'when topic is opening' do
+      context 'when guest send request' do
+        it_behaves_like 'request_require_authentication', proc { subject }
+      end
+
+      context 'when banned user send request' do
+        before { sign_in_as(banned_user.email) }
+
+        it_behaves_like 'request_forbidden', proc { subject }
+
+        it 'does not change the topic' do
+          expect { subject }.not_to change { topic.first_post.reload.content }
+        end
+      end
+
+      context 'when visitor send request' do
+        before { sign_in_as(visitor.email) }
+
+        it_behaves_like 'request_forbidden', proc { subject }
+
+        it 'does not change the topic' do
+          expect { subject }.not_to change { topic.first_post.reload.content }
+        end
+      end
+
+      context 'when moderator send request' do
+        before { sign_in_as(moderator.email) }
+
+        it_behaves_like 'request_forbidden', proc { subject }
+
+        it 'does not change the topic' do
+          expect { subject }.not_to change { topic.first_post.reload.content }
+        end
+      end
+
+      context 'when creator send request' do
+        before { sign_in_as(user.email) }
+
+        it 'change the topic content' do
+          expect { subject }.to change { topic.first_post.reload.content }
+        end
+
+        it 'does not change the topic name' do
+          expect { subject }.not_to change { topic.reload.name }
+        end
+      end
+
+      context 'when manager send request' do
+        before { sign_in_as(manager.email) }
+
+        it 'change the topic content' do
+          expect { subject }.to change { topic.first_post.reload.content }
+        end
+
+        it 'does not change the topic name' do
+          expect { subject }.to change { topic.reload.name }
+        end
+      end
+
+      context 'when admin send request' do
+        before { sign_in_as(admin.email) }
+
+        it 'change the topic content' do
+          expect { subject }.to change { topic.first_post.reload.content }
+        end
+
+        it 'does not change the topic name' do
+          expect { subject }.to change { topic.reload.name }
+        end
       end
     end
   end

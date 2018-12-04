@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     @post = @topic.posts.build(create_post_params)
     authorize @post
     if @post.save
-      redirect_to topic_path(@topic, page: @topic.posts.page.total_pages)
+      redirect_to @topic
     else
       render :new
     end
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     authorize @post
     if @post.update(post_params)
-      redirect_to topic_path(@post.topic)
+      redirect_to @post.topic
     else
       render :edit
     end

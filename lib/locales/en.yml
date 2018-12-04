@@ -26,6 +26,7 @@ en:
       categories: Home
       topics:
         new: Create new topic
+        edit: Edit topic
       posts:
         new: Reply
         edit: Edit reply
@@ -75,7 +76,9 @@ en:
     topics:
       show:
         new_post: Reply
+        edit: Edit
         posts:
+          edit: Edit
           original_post: Original post
           vote:
             zero: No votes
@@ -89,6 +92,11 @@ en:
           delete: Delete
       new:
         title: Create new topic
+        submit: Create topic
+      edit:
+        title: 'Edit topic %{topic}'
+        submit: Save topic
+      form:
         post_to_html: '<span class="post-to">Post to:</span> %{category}'
         placeholder:
           name: Topic name

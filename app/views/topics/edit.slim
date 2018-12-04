@@ -1,0 +1,20 @@
+
+= breadcrumbs_for \
+  Hash[path: root_path, title: t('views.breadcrumbs.categories')],
+  Hash[path: category_path(@topic.category), title: @topic.category.name],
+  Hash[path: topic_path(@topic), title: @topic.name],
+  Hash[title: t('views.breadcrumbs.topics.edit')]
+
+= content_for :title
+  = t('views.topics.edit.title', topic: @topic.name)
+
+= form_with model: @topic, url: topic_path(@topic), method: :put, class: 'topic-form', local: true do |f|
+  = render 'topics/form', f: f, topic: @topic, submit_text: t('views.topics.edit.submit') do
+    - if policy(@topic.category).manage?
+      .row
+        .input-field.col.s12
+          = f.text_field :name, autofocus: true,
+            placeholder: t('views.topics.form.placeholder.name'),
+            class: classnames(invalid: @topic.errors[:name].present?)
+          = f.label :name, class: 'required'
+          = error_message_for(@topic, :name)
