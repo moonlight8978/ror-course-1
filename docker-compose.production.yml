@@ -31,6 +31,7 @@ services:
     restart: always
     volumes:
       - /data/clvoz/production/rails/log:/var/www/clvoz/log
+      - /data/clvoz/production/rails/storage:/var/www/clvoz/storage
     command: puma -C config/puma.rb
     depends_on:
       - db
