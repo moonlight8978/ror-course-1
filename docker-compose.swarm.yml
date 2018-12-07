@@ -2,38 +2,35 @@ version: '3.7'
 services:
   nginx-production:
     image: moonlight8978/clvoz:nginx-production
-    build:
-      context: .
-      target: webserver
-      args:
-        RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    deploy:
+      placement:
+        constraints: [node.role == manager]
     env_file:
       - .env
-    restart: always
     ports:
       - 80:80
       - 443:443
     command: ['nginx', '-g', 'daemon off;']
     volumes:
       - /data/clvoz/production/nginx/log:/var/log/nginx
-    depends_on:
-      - server-production
+    networks:
+      - public
+      - private
 
   server-production:
     image: moonlight8978/clvoz:server-production
-    build:
-      context: .
-      target: appserver
-      args:
-        RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
     env_file:
       - .env
-    restart: always
     volumes:
       - /data/clvoz/production/rails/log:/var/www/clvoz/log
     command: puma -C config/puma.rb
-    depends_on:
-      - db
+    networks:
+      - public
+      - private
 
   db:
     image: postgres:10.6-alpine
@@ -41,4 +38,12 @@ services:
       - .env
     volumes:
       - /data/clvoz/production/postgresql/data:/var/lib/postgresql/data
-    restart: always
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - private
+
+networks:
+  public:
+  private:

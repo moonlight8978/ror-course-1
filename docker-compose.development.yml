@@ -21,7 +21,7 @@ services:
   db:
     image: postgres:latest
     volumes:
-      - /data/app/clvoz/db:/var/lib/postgresql/data
+      - /data/clvoz/development/postgresql/data:/var/lib/postgresql/data
     restart: unless-stopped
     ports:
       - ${HOST_DB_PORT}:5432
@@ -29,7 +29,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4:latest
     volumes:
-      - /data/pgadmin:/var/lib/pgadmin
+      - /data/clvoz/development/pgadmin:/var/lib/pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@framgia.com
       PGADMIN_DEFAULT_PASSWORD: 1111
