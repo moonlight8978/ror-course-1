@@ -47,3 +47,4 @@ services:
     volumes:
       - /data/clvoz/production/nginx/log:/var/log/nginx
       - ./tmp/.htpasswd:/etc/auth/.htpasswd
+      - ./deploy/clvoz.docker.conf:/etc/nginx/conf.d/clvoz.docker.conf
