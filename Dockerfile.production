@@ -14,11 +14,10 @@ COPY . .
 FROM base as builder
 
 ARG RAILS_MASTER_KEY
-ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 
 RUN apk --update add yarn
 
-RUN rake assets:precompile
+RUN rake assets:precompile RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
 
 FROM base as appserver
 

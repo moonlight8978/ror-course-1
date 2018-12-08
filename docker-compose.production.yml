@@ -1,5 +1,13 @@
 version: '3.7'
 services:
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock --no-auth
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/clvoz/production/portainer:/data
+    restart: always
+
   nginx-production:
     image: moonlight8978/clvoz:nginx-production
     build:
@@ -16,8 +24,10 @@ services:
     command: ['nginx', '-g', 'daemon off;']
     volumes:
       - /data/clvoz/production/nginx/log:/var/log/nginx
+      - ./tmp/.htpasswd:/etc/auth/.htpasswd
     depends_on:
       - server-production
+      - portainer
 
   server-production:
     image: moonlight8978/clvoz:server-production

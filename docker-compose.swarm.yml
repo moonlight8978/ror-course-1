@@ -1,20 +1,27 @@
 version: '3.7'
 services:
-  nginx-production:
-    image: moonlight8978/clvoz:nginx-production
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock --no-auth
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/clvoz/production/portainer:/data
     deploy:
       placement:
         constraints: [node.role == manager]
+    networks:
+      - private
+
+  db:
+    image: postgres:10.6-alpine
     env_file:
       - .env
-    ports:
-      - 80:80
-      - 443:443
-    command: ['nginx', '-g', 'daemon off;']
     volumes:
-      - /data/clvoz/production/nginx/log:/var/log/nginx
+      - /data/clvoz/production/postgresql/data:/var/lib/postgresql/data
+    deploy:
+      placement:
+        constraints: [node.role == manager]
     networks:
-      - public
       - private
 
   server-production:
@@ -30,19 +37,24 @@ services:
       - /data/clvoz/production/rails/storage:/var/www/clvoz/storage
     command: puma -C config/puma.rb
     networks:
-      - public
       - private
 
-  db:
-    image: postgres:10.6-alpine
-    env_file:
-      - .env
-    volumes:
-      - /data/clvoz/production/postgresql/data:/var/lib/postgresql/data
+  nginx-production:
+    image: moonlight8978/clvoz:nginx-production
     deploy:
       placement:
         constraints: [node.role == manager]
+    env_file:
+      - .env
+    ports:
+      - 80:80
+      - 443:443
+    command: ['nginx', '-g', 'daemon off;']
+    volumes:
+      - /data/clvoz/production/nginx/log:/var/log/nginx
+      - ./deploy/.htpasswd:/etc/auth/.htpasswd
     networks:
+      - public
       - private
 
 networks:
