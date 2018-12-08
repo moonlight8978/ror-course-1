@@ -9,8 +9,6 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
-    networks:
-      - private
 
   db:
     image: postgres:10.6-alpine
@@ -21,8 +19,6 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
-    networks:
-      - private
 
   server-production:
     image: moonlight8978/clvoz:server-production
@@ -36,8 +32,6 @@ services:
       - /data/clvoz/production/rails/log:/var/www/clvoz/log
       - /data/clvoz/production/rails/storage:/var/www/clvoz/storage
     command: puma -C config/puma.rb
-    networks:
-      - private
 
   nginx-production:
     image: moonlight8978/clvoz:nginx-production
@@ -52,11 +46,4 @@ services:
     command: ['nginx', '-g', 'daemon off;']
     volumes:
       - /data/clvoz/production/nginx/log:/var/log/nginx
-      - ./deploy/.htpasswd:/etc/auth/.htpasswd
-    networks:
-      - public
-      - private
-
-networks:
-  public:
-  private:
+      - ./tmp/.htpasswd:/etc/auth/.htpasswd
