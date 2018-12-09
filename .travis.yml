@@ -30,10 +30,10 @@ before_script:
   - psql -c 'create database clvoz_test;' -U postgres
   - cp config/database.travis.yml config/database.yml
   - cp config/credentials.travis.yml.enc config/credentials.yml.enc
-  - rake db:schema:load
+  - bundle exec rake db:schema:load
 
 script:
   - yarn eslint
   - yarn stylelint
-  - rubocop
-  - rake spec
+  - bundle exec rubocop
+  - bundle exec rake spec
