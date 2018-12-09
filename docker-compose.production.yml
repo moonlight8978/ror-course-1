@@ -1,6 +1,15 @@
 version: '3.7'
 services:
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock --no-auth
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/clvoz/production/portainer:/data
+    restart: always
+
   nginx-production:
+    image: moonlight8978/clvoz:nginx-production
     build:
       context: .
       target: webserver
@@ -14,11 +23,15 @@ services:
       - 443:443
     command: ['nginx', '-g', 'daemon off;']
     volumes:
-      - /data/clvoz/nginx/log:/var/log/nginx
+      - /data/clvoz/production/nginx/log:/var/log/nginx
+      - ./tmp/.htpasswd:/etc/auth/.htpasswd
+      - ./deploy/clvoz.docker.conf:/etc/nginx/conf.d/clvoz.docker.conf
     depends_on:
       - server-production
+      - portainer
 
   server-production:
+    image: moonlight8978/clvoz:server-production
     build:
       context: .
       target: appserver
@@ -28,7 +41,8 @@ services:
       - .env
     restart: always
     volumes:
-      - /data/clvoz/rails/log:${RAILS_ROOT}/log
+      - /data/clvoz/production/rails/log:/var/www/clvoz/log
+      - /data/clvoz/production/rails/storage:/var/www/clvoz/storage
     command: puma -C config/puma.rb
     depends_on:
       - db
@@ -38,5 +52,5 @@ services:
     env_file:
       - .env
     volumes:
-      - /data/clvoz/postgresql/data:/var/lib/postgresql/data
+      - /data/clvoz/production/postgresql/data:/var/lib/postgresql/data
     restart: always

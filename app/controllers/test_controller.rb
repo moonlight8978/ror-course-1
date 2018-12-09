@@ -1,5 +1,3 @@
 class TestController < ApplicationController
-  def index
-    render file: 'public/404.slim'
-  end
+  def index; end
 end
